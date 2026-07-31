@@ -100,24 +100,18 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
 }
 
 export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [showFloatingApply, setShowFloatingApply] = useState(false);
 
   useEffect(() => {
     const heroApply = document.getElementById("hero-apply");
-    const finalApply = document.getElementById("final-apply");
     if (!heroApply) return;
 
     const onScroll = () => {
       const heroRect = heroApply.getBoundingClientRect();
-      const finalRect = finalApply?.getBoundingClientRect();
       const heroVisible =
         heroRect.top < window.innerHeight && heroRect.bottom > 0;
-      const finalVisible = finalRect
-        ? finalRect.top < window.innerHeight - 20 && finalRect.bottom > 20
-        : false;
 
-      setShowFloatingApply(!heroVisible && !finalVisible && window.scrollY > 160);
+      setShowFloatingApply(!heroVisible && window.scrollY > 120);
     };
 
     onScroll();
@@ -313,32 +307,18 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           <img className="section-pup small-green" src="/assets/pup-group-21.svg" alt="" />
         </div>
         <div className="faq-list">
-          {faqItems.map((item, index) => {
-            const isOpen = openFaqIndex === index;
-
-            return (
-              <article className={`faq-item ${isOpen ? "is-open" : ""}`} key={item.question}>
-                <button
-                  aria-controls={`faq-answer-${index}`}
-                  aria-expanded={isOpen}
-                  className="faq-question"
-                  onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                  type="button"
-                >
-                  <span className="faq-number">{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item.question}</strong>
-                  <b aria-hidden className="faq-toggle">{isOpen ? "-" : "+"}</b>
-                </button>
-                <div
-                  aria-hidden={!isOpen}
-                  className={`faq-answer ${isOpen ? "is-open" : ""}`}
-                  id={`faq-answer-${index}`}
-                >
-                  <p>{item.answer}</p>
-                </div>
-              </article>
-            );
-          })}
+          {faqItems.map((item, index) => (
+            <details className="faq-item" key={item.question}>
+              <summary className="faq-question">
+                <span className="faq-number">{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item.question}</strong>
+                <b aria-hidden className="faq-toggle" />
+              </summary>
+              <div className="faq-answer" id={`faq-answer-${index}`}>
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
         </div>
         <div className="final-apply-panel" id="final-apply">
           <span>Ready to build with Scoopic?</span>
@@ -460,8 +440,15 @@ function AmbassadorVideoPhone({
       className={`orbit-phone orbit-phone-${index + 1}`}
       onBlur={muteVideoSound}
       onFocus={enableVideoSound}
+      onContextMenu={(event) => event.preventDefault()}
       onMouseEnter={enableVideoSound}
       onMouseLeave={muteVideoSound}
+      onPointerCancel={muteVideoSound}
+      onPointerDown={enableVideoSound}
+      onPointerUp={muteVideoSound}
+      onTouchCancel={muteVideoSound}
+      onTouchEnd={muteVideoSound}
+      onTouchStart={enableVideoSound}
       tabIndex={0}
     >
       <div className="orbit-phone-screen">
@@ -487,7 +474,7 @@ function enableVideoSound(event: SyntheticEvent<HTMLElement>) {
     if (video !== currentVideo) video.muted = true;
   });
 
-  currentVideo.volume = 0.82;
+  currentVideo.volume = 1;
   currentVideo.muted = false;
   void currentVideo.play().catch(() => {
     currentVideo.muted = true;

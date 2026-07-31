@@ -93,7 +93,8 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /Will I post on my personal accounts\?/);
   assert.match(page, /Uncapped\. You'll receive a \$500 monthly base pay/);
   assert.match(page, /faq-list/);
-  assert.match(page, /aria-expanded=\{isOpen\}/);
+  assert.match(page, /<details className="faq-item"/);
+  assert.match(page, /<summary className="faq-question"/);
   assert.match(page, /faq-answer/);
   assert.match(page, /floating-apply/);
   assert.match(layout, /Scoopic Student Ambassador Program/);
