@@ -685,6 +685,7 @@ img {
 
 .product-points article,
 .program-card,
+.bonus-ladder,
 .faq-item {
   background: rgba(5, 5, 5, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.11);
@@ -750,24 +751,24 @@ img {
 
 .program-board {
   display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  grid-template-columns: minmax(480px, 1.04fr) minmax(430px, 0.96fr);
 }
 
 .program-card {
+  border-color: rgba(183, 255, 22, 0.26);
+  box-shadow:
+    inset 0 0 30px rgba(183, 255, 22, 0.025),
+    0 0 18px rgba(183, 255, 22, 0.025);
   display: grid;
-  gap: 14px;
-  min-height: 220px;
+  gap: 13px;
+  min-height: 0;
   overflow: hidden;
-  padding: 24px;
+  padding: clamp(20px, 1.75vw, 26px);
 }
 
-.intro-card {
-  grid-column: span 2;
-  min-height: 180px;
-}
-
-.program-card span {
+.program-card span,
+.bonus-ladder-copy span {
   color: var(--lime);
   font-size: 12px;
   font-weight: 700;
@@ -786,8 +787,9 @@ img {
   counter-reset: program-step;
   color: rgba(246, 247, 242, 0.78);
   display: grid;
-  gap: 14px;
-  line-height: 1.5;
+  gap: 13px;
+  font-size: clamp(15px, 0.98vw, 17px);
+  line-height: 1.42;
   margin: 0;
   padding: 0;
 }
@@ -811,11 +813,11 @@ img {
   display: inline-flex;
   font-size: 13px;
   font-weight: 700;
-  height: 32px;
+  height: 30px;
   justify-content: center;
   line-height: 1;
-  margin-top: 4px;
-  width: 44px;
+  margin-top: 2px;
+  width: 46px;
 }
 
 .pay-highlight {
@@ -830,8 +832,231 @@ img {
 }
 
 .payout-card {
+  align-content: start;
   border-color: rgba(183, 255, 22, 0.34);
   box-shadow: inset 0 0 36px rgba(183, 255, 22, 0.04);
+}
+
+.pay-split {
+  align-items: start;
+  display: grid;
+  grid-template-columns: max-content auto max-content;
+  column-gap: clamp(5px, 0.58vw, 10px);
+  justify-content: center;
+  max-width: 100%;
+}
+
+.pay-column {
+  display: grid;
+  justify-items: center;
+  row-gap: 9px;
+}
+
+.pay-amount,
+.pay-plus {
+  color: var(--lime);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.92;
+  text-shadow: 0 0 28px rgba(183, 255, 22, 0.42);
+  white-space: nowrap;
+}
+
+.pay-amount {
+  font-size: clamp(36px, 3vw, 48px);
+}
+
+.pay-plus {
+  align-self: start;
+  font-size: clamp(25px, 1.95vw, 32px);
+  padding-top: 0.18em;
+}
+
+.pay-label {
+  color: rgba(246, 247, 242, 0.7);
+  font-size: clamp(11px, 0.86vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.payout-card p {
+  font-size: clamp(15px, 1vw, 17px);
+  line-height: 1.55;
+  margin: 4px 0 0;
+  max-width: 520px;
+}
+
+.bonus-ladder {
+  border-color: rgba(183, 255, 22, 0.36);
+  box-shadow:
+    inset 0 0 42px rgba(183, 255, 22, 0.035),
+    0 0 34px rgba(183, 255, 22, 0.04);
+  display: grid;
+  gap: 0;
+  grid-column: span 2;
+  min-height: 270px;
+  overflow: hidden;
+  padding: clamp(18px, 1.65vw, 24px);
+  position: relative;
+}
+
+.bonus-ladder::before {
+  background: radial-gradient(circle, rgba(183, 255, 22, 0.11), transparent 62%);
+  content: "";
+  height: 360px;
+  pointer-events: none;
+  position: absolute;
+  right: 8%;
+  top: -80px;
+  width: 520px;
+}
+
+.bonus-ladder-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.bonus-ladder-copy p {
+  color: rgba(246, 247, 242, 0.7);
+  font-size: clamp(14px, 0.95vw, 16px);
+  line-height: 1.38;
+  margin: 7px 0 0;
+}
+
+.bonus-ladder-chart {
+  align-self: center;
+  display: block;
+  height: clamp(190px, 15.8vw, 242px);
+  justify-self: center;
+  max-width: 100%;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.ladder-curve-base,
+.ladder-curve-flow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ladder-curve-base {
+  stroke: rgba(183, 255, 22, 0.28);
+  stroke-width: 3;
+}
+
+.ladder-curve-flow {
+  animation: ladderFlow 4.4s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(183, 255, 22, 0.86));
+  stroke: rgba(235, 255, 166, 0.96);
+  stroke-dasharray: 54 850;
+  stroke-width: 5;
+}
+
+@keyframes ladderFlow {
+  from {
+    stroke-dashoffset: 900;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ladder-connector {
+  stroke: rgba(183, 255, 22, 0.38);
+  stroke-linecap: round;
+  stroke-width: 1.4;
+}
+
+.ladder-node-ring {
+  animation: ladderPulseRing 2.4s ease-in-out infinite;
+  fill: rgba(183, 255, 22, 0.08);
+  stroke: rgba(183, 255, 22, 0.5);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ladder-node-core {
+  animation: ladderPulseCore 2.4s ease-in-out infinite;
+  fill: var(--lime);
+  filter: drop-shadow(0 0 8px rgba(183, 255, 22, 0.9));
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ladder-step:nth-of-type(2) .ladder-node-ring,
+.ladder-step:nth-of-type(2) .ladder-node-core {
+  animation-delay: 0.08s;
+}
+
+.ladder-step:nth-of-type(3) .ladder-node-ring,
+.ladder-step:nth-of-type(3) .ladder-node-core {
+  animation-delay: 0.16s;
+}
+
+.ladder-step:nth-of-type(4) .ladder-node-ring,
+.ladder-step:nth-of-type(4) .ladder-node-core {
+  animation-delay: 0.24s;
+}
+
+.ladder-step:nth-of-type(5) .ladder-node-ring,
+.ladder-step:nth-of-type(5) .ladder-node-core {
+  animation-delay: 0.32s;
+}
+
+.ladder-step:nth-of-type(6) .ladder-node-ring,
+.ladder-step:nth-of-type(6) .ladder-node-core {
+  animation-delay: 0.4s;
+}
+
+@keyframes ladderPulseRing {
+  0%,
+  100% {
+    opacity: 0.54;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.22);
+  }
+}
+
+@keyframes ladderPulseCore {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.ladder-label rect {
+  fill: rgba(3, 10, 7, 0.88);
+  stroke: rgba(183, 255, 22, 0.52);
+  stroke-width: 1.2;
+}
+
+.ladder-label text {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.ladder-views {
+  fill: rgba(246, 247, 242, 0.84);
+  font-size: 12px;
+}
+
+.ladder-bonus {
+  fill: var(--lime);
+  font-size: 15px;
 }
 
 .ambassadors-section {
@@ -1180,8 +1405,11 @@ img {
 
 .theme-warm .title-lime,
 .theme-warm .pay-highlight,
+.theme-warm .pay-amount,
+.theme-warm .pay-plus,
 .theme-warm .product-points span,
 .theme-warm .program-card span,
+.theme-warm .bonus-ladder-copy span,
 .theme-warm .faq-number,
 .theme-warm .faq-question strong,
 .theme-warm .faq-toggle,
@@ -1234,6 +1462,7 @@ img {
 
 .theme-warm .product-points article,
 .theme-warm .program-card,
+.theme-warm .bonus-ladder,
 .theme-warm .faq-item {
   background: rgba(255, 252, 236, 0.78);
   border-color: rgba(86, 61, 16, 0.14);
@@ -1244,7 +1473,8 @@ img {
   color: rgba(48, 37, 13, 0.68);
 }
 
-.theme-warm .payout-card {
+.theme-warm .payout-card,
+.theme-warm .bonus-ladder {
   border-color: rgba(255, 163, 20, 0.45);
   box-shadow:
     0 18px 54px rgba(131, 82, 0, 0.08),
@@ -1397,7 +1627,9 @@ img {
 }
 
 .theme-dopamine .title-lime,
-.theme-dopamine .pay-highlight {
+.theme-dopamine .pay-highlight,
+.theme-dopamine .pay-amount,
+.theme-dopamine .pay-plus {
   color: #ff4bd8;
   text-shadow:
     0 0 18px rgba(255, 75, 216, 0.52),
@@ -1451,6 +1683,7 @@ img {
 
 .theme-dopamine .product-points article,
 .theme-dopamine .program-card,
+.theme-dopamine .bonus-ladder,
 .theme-dopamine .faq-item {
   background: rgba(4, 4, 13, 0.7);
   border-color: rgba(255, 255, 255, 0.13);
@@ -1479,6 +1712,7 @@ img {
 
 .theme-dopamine .product-points span,
 .theme-dopamine .program-card span,
+.theme-dopamine .bonus-ladder-copy span,
 .theme-dopamine .faq-number,
 .theme-dopamine .faq-question strong,
 .theme-dopamine .faq-toggle {
@@ -1650,6 +1884,10 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .bonus-ladder {
+    grid-column: auto;
+  }
+
   .home-section {
     gap: 28px;
     min-height: 100svh;
@@ -1693,12 +1931,25 @@ img {
     display: none;
   }
 
-  .intro-card {
-    grid-column: auto;
-  }
-
   .pay-highlight {
     font-size: clamp(34px, 10vw, 52px);
+  }
+
+  .pay-amount {
+    font-size: clamp(38px, 11vw, 58px);
+  }
+
+  .pay-plus {
+    font-size: clamp(28px, 8vw, 42px);
+  }
+
+  .bonus-ladder {
+    min-height: 270px;
+    padding: 18px;
+  }
+
+  .bonus-ladder-chart {
+    height: 235px;
   }
 
   .ambassador-orbit {

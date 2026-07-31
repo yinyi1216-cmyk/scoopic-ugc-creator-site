@@ -6,7 +6,7 @@ import type { SyntheticEvent } from "react";
 const applicationUrl =
   "https://docs.google.com/forms/d/1_WmgSFteeQsa0DAs4Psvp8OL0bg5A3cBl0NxR_MBnY8/edit?ts=6a2ff662";
 const contactUrl =
-  "mailto:marketing@pupixel.ai?subject=Scoopic%20Student%20Ambassador%20Program";
+  "mailto:marketing@scoopic.ai?subject=Scoopic%20Student%20Ambassador%20Program";
 
 type LandingTheme = "" | "theme-warm" | "theme-dopamine";
 
@@ -39,35 +39,44 @@ const ambassadorVideos = [
 
 const faqItems = [
   {
-    question: "Do I have to be a current college student?",
+    question: "Can I apply if I'm not currently in college?",
     answer:
-      "You must be at least 18. Campus roles fit students or people connected to college communities. Graduates and non-students may still be considered for online creator roles if their style fits Scoopic.",
+      "Absolutely! We call it Student Ambassador because Scoopic is targeting younger generation around high school and college age. But you don't have to be a student to apply. If you have an active social life, plenty of real moments to share, and a passion for content creation, we'd love to hear from you.",
   },
   {
-    question: "Do I need to use my personal social accounts?",
+    question: "Will I post on my personal accounts?",
     answer:
-      "No. Most creators use new Scoopic-focused TikTok and Instagram accounts, so personal accounts and existing content strategies are not affected.",
+      "No. You'll create new Scoopic TikTok and Instagram accounts using a new Gmail. Your personal accounts stay completely separate.",
   },
   {
-    question: "What kind of content should I create?",
+    question: "What will I actually be posting?",
     answer:
-      "Make short, casual videos about friends, daily moments, camera-roll stories, text overlays, and real Scoopic app experiences. Scoopic provides templates and examples; creators keep their own style.",
+      "Think real friend moments, camera-roll stories, relatable text hooks, and honest reactions to Scoopic. We'll provide examples, but the content should still feel like YOU. Also search up Scoopic on TikTok and Instagram to see what our current ambassadors are creating!",
   },
   {
-    question: "How many videos do creators need to post?",
+    question: "How many videos are we talking about?",
     answer:
-      "About 7 short videos per week, or around 28 per month. Videos are usually 10-20 seconds, and the same video can be posted to both TikTok and Instagram.",
+      "You'll create ONE short video a day, usually 10 to 40 seconds long, then cross-post it to TikTok and Instagram. One video, two platforms.",
   },
   {
-    question: "How are referrals tracked?",
+    question: "How much can I earn?",
     answer:
-      "Each participant receives a personal referral code. A referral counts after the friend downloads Scoopic, signs up, completes onboarding, tries the app, and is verified as qualified.",
+      "Uncapped. You'll receive a $500 monthly base pay, plus view bonuses for every high-performing video. There's no cap on how many videos can earn bonuses, so the more videos that go viral, the more you can make.",
   },
   {
-    question: "Is the $500 base pay per video or per month?",
+    question: "Do I have to invite friends?",
     answer:
-      "The $500 is monthly base pay, not per-video pay. It is paid when deliverables are completed and guidelines are followed. Payments are biweekly through Safeguard; performance bonuses are separate.",
+      "Yes. Scoopic is made to be experienced with your people, so you'll be expected to invite at least 5 friends and try it together. Also for each eligible student friend you invite, you will earn $20 once they complete the required steps and pass verification.",
   },
+];
+
+const bonusSteps = [
+  { views: "50K views", bonus: "$50", x: 74, y: 178, labelY: 212, side: "bottom" },
+  { views: "100K views", bonus: "$100", x: 224, y: 154, labelY: 70, side: "top" },
+  { views: "500K views", bonus: "$300", x: 374, y: 136, labelY: 170, side: "bottom" },
+  { views: "1M views", bonus: "$500", x: 528, y: 112, labelY: 28, side: "top" },
+  { views: "2M views", bonus: "$1,000", x: 686, y: 98, labelY: 132, side: "bottom" },
+  { views: "5M views", bonus: "$2,000", x: 850, y: 84, labelY: 0, side: "top" },
 ];
 
 function scrollToSection(id: string) {
@@ -149,14 +158,15 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
         <section className="hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">Scoopic Student Ambassador Program</p>
+            <p className="eyebrow">Looking for Passionate GenZ UGC Creators</p>
             <h1>
               <span className="title-line title-white">Become a Scoopic</span>
               <span className="title-line title-lime">Student Ambassador</span>
             </h1>
             <p className="hero-subtitle">
-              Create campus-native stories with your friends, test Scoopic
-              early, and help shape what real social apps feel like.
+              Be the first creator to experience the next social app for real
+              friend groups, create authentic content inspired by real student
+              life, and help shape it from day one.
             </p>
             <a
               className="primary-cta hero-cta"
@@ -214,30 +224,25 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         </div>
         <div className="section-copy feature-copy">
           <p>
-            Scoopic turns everyday moments into private, funny stories for
-            real friends. It is built around photos people already care about,
-            then adds a playful Pup layer that makes sharing feel personal.
-          </p>
-          <p>
-            The product is not about public performance. It is about found
-            memories, friend-group reactions, and the feeling of opening
-            something made for you.
+            At Scoopic, you&apos;ll unbox a personal paparazzi puppy that turns your
+            camera roll moments into playful stories, inside jokes, and memories
+            to share with your people.
           </p>
           <div className="product-points" aria-label="Scoopic product points">
             <article>
               <span>01</span>
-              <strong>Photos become stories</strong>
-              <p>Scoopic helps real moments turn into quick, shareable story prompts.</p>
+              <strong>Built for close friends</strong>
+              <p>The best Scoopic moments feel like they belong to THE group chat.</p>
             </article>
             <article>
               <span>02</span>
-              <strong>Everyone has a Pup</strong>
-              <p>Your Pup makes the experience feel ownable, expressive, and easy to recognize.</p>
+              <strong>Everyone gets a puppy</strong>
+              <p>Your paparazzi puppy decodes your camera roll and discovers what makes you YOU.</p>
             </article>
             <article>
               <span>03</span>
-              <strong>Built for close friends</strong>
-              <p>The best Scoopic moments feel like they belong in a real group chat.</p>
+              <strong>Your camera roll has lore</strong>
+              <p>Scoopic turns your everyday moments into funny, surprising stories worth sharing.</p>
             </article>
           </div>
         </div>
@@ -253,38 +258,39 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           <img className="section-pup pink" src="/assets/pup-pink-main.png" alt="" />
         </div>
         <div className="program-board">
-          <article className="program-card intro-card">
-            <span>Project intro</span>
-            <h3>Help Scoopic grow on campus while testing the product early.</h3>
-            <p>
-              This is a paid student ambassador program for creators who can
-              make campus-native content, use Scoopic with friends, and share
-              product feedback with the team.
-            </p>
-          </article>
           <article className="program-card">
             <span>What you do</span>
             <ol className="program-steps">
-              <li>Create one short-form Scoopic video every day, with 14 videos completed over each two-week cycle.</li>
-              <li>Use Scoopic with friends each week and capture real moments, reactions, and app flows that can become content ideas.</li>
-              <li>Share feedback, comments, and honest reactions that help Scoopic become better for real friend groups.</li>
+              <li>Create ONE short video for Scoopic every day and post it to TikTok + Instagram.</li>
+              <li>Bring 5+ friends to Scoopic to experience with you, and see what stories your puppy finds.</li>
+              <li>Share honest weekly feedback and help shape what Scoopic becomes.</li>
             </ol>
           </article>
           <article className="program-card payout-card">
             <span>What you get</span>
-            <strong className="pay-highlight">$500-$2,000</strong>
+            <div className="pay-split" aria-label="$500 monthly base plus $2,000 bonus up to">
+              <div className="pay-column">
+                <strong className="pay-amount pay-base">$500</strong>
+                <small className="pay-label pay-base-label">monthly base</small>
+              </div>
+              <strong className="pay-plus">+</strong>
+              <div className="pay-column">
+                <strong className="pay-amount pay-bonus">$2,000</strong>
+                <small className="pay-label pay-bonus-label">bonus up to</small>
+              </div>
+            </div>
             <p>
-              Ambassadors can earn meaningful pay through base work, approved
-              content, bonuses, and referrals.
+              When your videos reach view milestones, you&apos;ll get bonuses.
             </p>
           </article>
+          <BonusLadder />
         </div>
       </section>
 
       <section className="home-section ambassadors-section" id="ambassadors">
         <div className="section-heading centered">
           <p className="section-kicker">Stories</p>
-          <h2>Meet the Ambassadors</h2>
+          <h2>Meet Our Ambassadors</h2>
           <img className="section-pup blue" src="/assets/pup-group-28.svg" alt="" />
         </div>
         <div className="ambassador-orbit" aria-label="Ambassador video examples">
@@ -302,8 +308,8 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       <section className="home-section faq-section" id="faq">
         <div className="section-heading centered">
           <p className="section-kicker">FAQ</p>
-          <h2>Frequently Asked</h2>
-          <p>Clear answers for creators before they apply.</p>
+          <h2>If You Wanna Know</h2>
+          <p>We&apos;ve prepared some answers</p>
           <img className="section-pup small-green" src="/assets/pup-group-21.svg" alt="" />
         </div>
         <div className="faq-list">
@@ -347,6 +353,65 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         </div>
       </section>
     </main>
+  );
+}
+
+function BonusLadder() {
+  return (
+    <article className="bonus-ladder" aria-label="View bonus ladder">
+      <div className="bonus-ladder-copy">
+        <span>View bonus ladder</span>
+        <p>Eligible video views unlock higher bonus tiers.</p>
+      </div>
+      <svg
+        aria-hidden="true"
+        className="bonus-ladder-chart"
+        focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 920 290"
+      >
+        <path
+          className="ladder-curve-base"
+          d="M74 178 C128 172 174 162 224 154 C276 144 326 140 374 136 C430 130 480 119 528 112 C584 104 634 101 686 98 C742 94 794 88 850 84"
+        />
+        <path
+          className="ladder-curve-flow"
+          d="M74 178 C128 172 174 162 224 154 C276 144 326 140 374 136 C430 130 480 119 528 112 C584 104 634 101 686 98 C742 94 794 88 850 84"
+        />
+        {bonusSteps.map((step) => {
+          const labelX = step.x - 63;
+          const connectorStart =
+            step.side === "top" ? step.labelY + 56 : step.y + 12;
+          const connectorEnd =
+            step.side === "top" ? step.y - 12 : step.labelY;
+
+          return (
+            <g className="ladder-step" key={step.views}>
+              <line
+                className="ladder-connector"
+                x1={step.x}
+                x2={step.x}
+                y1={connectorStart}
+                y2={connectorEnd}
+              />
+              <g className="ladder-node" transform={`translate(${step.x} ${step.y})`}>
+                <circle className="ladder-node-ring" r="14" />
+                <circle className="ladder-node-core" r="6" />
+              </g>
+              <g className="ladder-label" transform={`translate(${labelX} ${step.labelY})`}>
+                <rect height="56" rx="18" width="126" />
+                <text textAnchor="middle" x="63" y="23">
+                  <tspan className="ladder-views">{step.views}</tspan>
+                  <tspan className="ladder-bonus" dy="19" x="63">
+                    {step.bonus}
+                  </tspan>
+                </text>
+              </g>
+            </g>
+          );
+        })}
+      </svg>
+    </article>
   );
 }
 
