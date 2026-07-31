@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { SyntheticEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
+import type { KeyboardEvent, SyntheticEvent } from "react";
 
 const applicationUrl =
   "https://docs.google.com/forms/d/1_WmgSFteeQsa0DAs4Psvp8OL0bg5A3cBl0NxR_MBnY8/edit?ts=6a2ff662";
@@ -9,8 +10,12 @@ const contactUrl =
   "mailto:marketing@scoopic.ai?subject=Scoopic%20Student%20Ambassador%20Program";
 
 type LandingTheme = "" | "theme-warm" | "theme-dopamine";
+type AmbassadorVideo = {
+  src: string;
+  label: string;
+};
 
-const ambassadorVideos = [
+const ambassadorVideos: AmbassadorVideo[] = [
   {
     src: "/assets/ambassador-video-1.mp4",
     label: "Ambassador video 01",
@@ -101,17 +106,21 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
 
 export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
   const [showFloatingApply, setShowFloatingApply] = useState(false);
+  const [openFaqIndexes, setOpenFaqIndexes] = useState<Set<number>>(new Set());
+  const [activeVideo, setActiveVideo] = useState<AmbassadorVideo | null>(null);
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const heroApply = document.getElementById("hero-apply");
     if (!heroApply) return;
 
     const onScroll = () => {
+      const forceMobileCta = window.matchMedia("(max-width: 760px)").matches;
       const heroRect = heroApply.getBoundingClientRect();
       const heroVisible =
         heroRect.top < window.innerHeight && heroRect.bottom > 0;
 
-      setShowFloatingApply(!heroVisible && window.scrollY > 120);
+      setShowFloatingApply(forceMobileCta || (!heroVisible && window.scrollY > 120));
     };
 
     onScroll();
@@ -122,6 +131,74 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (!activeVideo) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const player = modalVideoRef.current;
+    if (player) {
+      player.muted = false;
+      player.defaultMuted = false;
+      player.volume = 1;
+      void player.play().catch(() => {
+        player.controls = true;
+      });
+    }
+
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeActiveVideo();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [activeVideo]);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndexes((current) => {
+      const next = new Set(current);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  };
+
+  const openVideoModal = (video: AmbassadorVideo) => {
+    muteAllAmbassadorVideos();
+    flushSync(() => {
+      setActiveVideo(video);
+    });
+
+    const player = document.querySelector<HTMLVideoElement>(".video-modal-player");
+    if (!player) return;
+
+    player.muted = false;
+    player.defaultMuted = false;
+    player.volume = 1;
+    player.currentTime = 0;
+    void player.play().catch(() => {
+      player.controls = true;
+    });
+  };
+
+  const closeActiveVideo = () => {
+    const player = modalVideoRef.current;
+    if (player) {
+      player.pause();
+      player.currentTime = 0;
+    }
+    setActiveVideo(null);
+  };
 
   return (
     <main className={["site", "landing-page", theme].filter(Boolean).join(" ")}>
@@ -210,6 +287,41 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         Apply Now <span aria-hidden>↗</span>
       </a>
 
+      {activeVideo && (
+        <div
+          aria-label={`${activeVideo.label} player`}
+          aria-modal="true"
+          className="video-modal"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              closeActiveVideo();
+            }
+          }}
+          role="dialog"
+        >
+          <button
+            aria-label="Close video"
+            className="video-modal-close"
+            onClick={closeActiveVideo}
+            type="button"
+          >
+            ×
+          </button>
+          <div className="video-modal-shell">
+            <video
+              aria-label={activeVideo.label}
+              autoPlay
+              className="video-modal-player"
+              controls
+              playsInline
+              preload="auto"
+              ref={modalVideoRef}
+              src={activeVideo.src}
+            />
+          </div>
+        </div>
+      )}
+
       <section className="home-section product-section" id="what-is-scoopic">
         <div className="section-heading">
           <p className="section-kicker">About Scoopic</p>
@@ -293,6 +405,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
               index={index}
               key={video.src}
               label={video.label}
+              onOpen={() => openVideoModal(video)}
               src={video.src}
             />
           ))}
@@ -308,16 +421,28 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         </div>
         <div className="faq-list">
           {faqItems.map((item, index) => (
-            <details className="faq-item" key={item.question}>
-              <summary className="faq-question">
+            <article
+              className={`faq-item ${openFaqIndexes.has(index) ? "is-open" : ""}`}
+              key={item.question}
+            >
+              <button
+                aria-controls={`faq-answer-${index}`}
+                aria-expanded={openFaqIndexes.has(index)}
+                className="faq-question"
+                onClick={() => toggleFaq(index)}
+                type="button"
+              >
                 <span className="faq-number">{String(index + 1).padStart(2, "0")}</span>
                 <strong>{item.question}</strong>
                 <b aria-hidden className="faq-toggle" />
-              </summary>
-              <div className="faq-answer" id={`faq-answer-${index}`}>
+              </button>
+              <div
+                className={`faq-answer ${openFaqIndexes.has(index) ? "is-open" : ""}`}
+                id={`faq-answer-${index}`}
+              >
                 <p>{item.answer}</p>
               </div>
-            </details>
+            </article>
           ))}
         </div>
         <div className="final-apply-panel" id="final-apply">
@@ -429,11 +554,19 @@ function AmbassadorVideoPhone({
   src,
   label,
   index,
+  onOpen,
 }: {
   src: string;
   label: string;
   index: number;
+  onOpen: () => void;
 }) {
+  const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    onOpen();
+  };
+
   return (
     <article
       aria-label={label}
@@ -443,9 +576,12 @@ function AmbassadorVideoPhone({
       onContextMenu={(event) => event.preventDefault()}
       onMouseEnter={enableVideoSound}
       onMouseLeave={muteVideoSound}
+      onClick={onOpen}
+      onKeyDown={onKeyDown}
       onPointerCancel={muteVideoSound}
       onPointerDown={enableVideoSound}
       onPointerUp={muteVideoSound}
+      role="button"
       onTouchCancel={muteVideoSound}
       onTouchEnd={muteVideoSound}
       onTouchStart={enableVideoSound}
@@ -470,12 +606,11 @@ function enableVideoSound(event: SyntheticEvent<HTMLElement>) {
   const currentVideo = event.currentTarget.querySelector<HTMLVideoElement>("video");
   if (!currentVideo) return;
 
-  document.querySelectorAll<HTMLVideoElement>(".orbit-phone video").forEach((video) => {
-    if (video !== currentVideo) video.muted = true;
-  });
+  muteAllAmbassadorVideos(currentVideo);
 
   currentVideo.volume = 1;
   currentVideo.muted = false;
+  currentVideo.defaultMuted = false;
   void currentVideo.play().catch(() => {
     currentVideo.muted = true;
   });
@@ -484,6 +619,15 @@ function enableVideoSound(event: SyntheticEvent<HTMLElement>) {
 function muteVideoSound(event: SyntheticEvent<HTMLElement>) {
   const currentVideo = event.currentTarget.querySelector<HTMLVideoElement>("video");
   if (currentVideo) currentVideo.muted = true;
+}
+
+function muteAllAmbassadorVideos(exceptVideo?: HTMLVideoElement) {
+  document.querySelectorAll<HTMLVideoElement>(".orbit-phone video").forEach((video) => {
+    if (video !== exceptVideo) {
+      video.muted = true;
+      video.defaultMuted = true;
+    }
+  });
 }
 
 function PhoneFrame({
