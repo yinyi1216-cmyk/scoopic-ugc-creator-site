@@ -411,6 +411,14 @@ function BonusLadder() {
           );
         })}
       </svg>
+      <ol className="bonus-ladder-mobile" aria-label="Bonus milestones">
+        {bonusSteps.map((step) => (
+          <li key={step.views}>
+            <span>{step.views}</span>
+            <strong>{step.bonus}</strong>
+          </li>
+        ))}
+      </ol>
     </article>
   );
 }

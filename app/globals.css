@@ -938,6 +938,10 @@ img {
   z-index: 2;
 }
 
+.bonus-ladder-mobile {
+  display: none;
+}
+
 .ladder-curve-base,
 .ladder-curve-flow {
   fill: none;
@@ -1845,24 +1849,88 @@ img {
 }
 
 @media (max-width: 760px) {
+  html:has(.landing-page) {
+    scroll-snap-type: none;
+  }
+
   .hero-shell {
-    padding-left: 18px;
-    padding-right: 18px;
-    min-height: 100svh;
+    min-height: auto;
+    padding: 18px 18px 56px;
   }
 
   .top-nav {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr auto;
   }
 
   .nav-links {
-    flex-wrap: wrap;
-    gap: 10px 18px;
+    display: flex;
+    gap: 6px;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-left: -4px;
+    max-width: calc(100vw - 36px);
+    overflow-x: auto;
+    padding: 0 4px 8px;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links button {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    flex: 0 0 auto;
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .contact-link {
+    border-radius: 14px;
+    font-size: 12px;
+    gap: 6px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    padding: 9px 11px;
+  }
+
+  .brand-mark {
+    font-size: 20px;
+    gap: 9px;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .brand-icon,
+  .brand-icon img {
+    border-radius: 10px;
+    height: 34px;
+    width: 34px;
+  }
+
+  .hero-grid {
+    gap: 20px;
+    min-height: auto;
+    padding-top: 30px;
+  }
+
+  .eyebrow,
+  .section-kicker {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
   }
 
   .hero-copy h1 {
-    font-size: 46px;
+    font-size: clamp(36px, 11vw, 48px);
+    line-height: 1.02;
   }
 
   .title-line {
@@ -1870,12 +1938,17 @@ img {
   }
 
   .hero-subtitle {
-    font-size: 18px;
+    font-size: 15px;
+    line-height: 1.52;
+    margin: 16px 0 20px;
+    max-width: 100%;
   }
 
   .primary-cta {
-    min-height: 72px;
-    min-width: 240px;
+    font-size: 21px;
+    min-height: 58px;
+    min-width: 210px;
+    padding: 14px 26px;
   }
 
   .product-points,
@@ -1889,94 +1962,271 @@ img {
   }
 
   .home-section {
-    gap: 28px;
-    min-height: 100svh;
-    padding: 64px 18px;
+    gap: 22px;
+    min-height: auto;
+    overflow: visible;
+    padding: 62px 18px;
   }
 
   .home-section h2 {
-    font-size: clamp(34px, 9vw, 50px);
+    font-size: clamp(32px, 10vw, 46px);
+    line-height: 1.08;
+  }
+
+  .section-heading p,
+  .section-copy,
+  .program-card p,
+  .faq-answer p {
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .section-pup {
+    margin-top: 16px;
+    max-width: 112px;
+  }
+
+  .product-section,
+  .program-section {
+    align-items: start;
   }
 
   .phone-stage {
-    height: 520px;
-    min-height: 520px;
+    height: 390px;
+    min-height: 390px;
+    width: 100%;
   }
 
   .phone-frame {
-    width: 170px;
+    border-radius: 28px;
+    padding: 5px;
+    width: 128px;
+  }
+
+  .phone-frame img {
+    border-radius: 22px;
   }
 
   .phone-main {
-    right: 19%;
-    width: 218px;
+    right: 23%;
+    top: 4%;
+    width: 172px;
   }
 
   .phone-left {
-    left: 14%;
+    left: 11%;
+    top: 18%;
+    width: 138px;
   }
 
   .phone-right {
-    right: 0;
-    width: 170px;
+    right: 2%;
+    top: 20%;
+    width: 134px;
   }
 
   .mascot-hero {
-    bottom: 24px;
-    left: 26%;
-    width: 152px;
+    bottom: 12px;
+    left: 29%;
+    width: 112px;
   }
 
   .feature-phone {
     display: none;
   }
 
-  .pay-highlight {
-    font-size: clamp(34px, 10vw, 52px);
+  .product-points {
+    margin-top: 18px;
   }
 
-  .pay-amount {
-    font-size: clamp(38px, 11vw, 58px);
+  .product-points article {
+    gap: 6px 10px;
+    padding: 16px;
   }
 
-  .pay-plus {
-    font-size: clamp(28px, 8vw, 42px);
+  .product-points strong {
+    font-size: 17px;
   }
 
-  .bonus-ladder {
-    min-height: 270px;
+  .product-points p {
+    font-size: 13px;
+  }
+
+  .program-section .section-heading h2 {
+    font-size: clamp(32px, 9vw, 42px);
+  }
+
+  .program-board {
+    gap: 12px;
+  }
+
+  .program-card {
+    border-radius: 16px;
+    gap: 12px;
     padding: 18px;
   }
 
+  .program-card span,
+  .bonus-ladder-copy span {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .program-steps {
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .program-steps li {
+    gap: 10px;
+    grid-template-columns: 42px 1fr;
+  }
+
+  .program-steps li::before {
+    font-size: 11px;
+    height: 28px;
+    width: 38px;
+  }
+
+  .pay-split {
+    column-gap: 5px;
+    justify-content: start;
+  }
+
+  .pay-amount {
+    font-size: clamp(32px, 9.6vw, 42px);
+  }
+
+  .pay-plus {
+    font-size: clamp(22px, 6.8vw, 30px);
+  }
+
+  .pay-label {
+    font-size: 9px;
+    letter-spacing: 0.02em;
+  }
+
+  .payout-card p {
+    font-size: 14px;
+    line-height: 1.48;
+  }
+
+  .bonus-ladder {
+    gap: 16px;
+    min-height: 0;
+    padding: 18px 18px 78px;
+  }
+
   .bonus-ladder-chart {
-    height: 235px;
+    display: none;
+  }
+
+  .bonus-ladder-copy p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .bonus-ladder-mobile {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bonus-ladder-mobile li {
+    align-items: center;
+    background: rgba(3, 10, 7, 0.72);
+    border: 1px solid rgba(183, 255, 22, 0.3);
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 11px 14px;
+  }
+
+  .bonus-ladder-mobile span {
+    color: rgba(246, 247, 242, 0.78);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .bonus-ladder-mobile strong {
+    color: var(--lime);
+    font-size: 16px;
+    font-weight: 700;
   }
 
   .ambassador-orbit {
-    --orbit-far-x: min(56vw, 225px);
-    --orbit-mid-x: min(43vw, 175px);
-    --orbit-near-x: min(31vw, 125px);
-    height: 430px;
-    min-height: 390px;
+    --orbit-far-x: min(60vw, 235px);
+    --orbit-mid-x: min(46vw, 180px);
+    --orbit-near-x: min(32vw, 128px);
+    height: 380px;
+    min-height: 340px;
     width: 100%;
   }
 
   .orbit-phone {
     animation-name: depthCarouselCompact;
-    width: clamp(104px, 30vw, 142px);
+    width: clamp(100px, 29vw, 132px);
+  }
+
+  .orbit-phone-screen {
+    border-radius: 24px;
+    padding: 3px;
+  }
+
+  .orbit-phone-screen video {
+    border-radius: 20px;
   }
 
   .faq-item {
     padding: 0;
   }
 
+  .faq-section .section-heading h2,
+  .ambassadors-section .section-heading h2 {
+    font-size: clamp(32px, 9.8vw, 44px);
+  }
+
+  .faq-section .section-heading p {
+    margin: 8px 0 0;
+  }
+
+  .faq-list {
+    gap: 10px;
+  }
+
   .faq-question {
     align-items: start;
-    padding: 18px;
+    gap: 10px;
+    grid-template-columns: auto 1fr auto;
+    padding: 16px;
+  }
+
+  .faq-number {
+    font-size: 11px;
+    height: 28px;
+    width: 36px;
+  }
+
+  .faq-question strong {
+    font-size: 16px;
+    line-height: 1.24;
+  }
+
+  .faq-toggle {
+    font-size: 18px;
+    height: 30px;
+    width: 30px;
   }
 
   .faq-answer.is-open {
-    padding: 0 18px 18px;
+    max-height: 420px;
+    padding: 0 16px 16px;
   }
 
   .faq-answer p {
@@ -1986,30 +2236,100 @@ img {
   .final-apply-panel {
     align-items: center;
     flex-direction: column;
+    gap: 14px;
+  }
+
+  .final-apply-panel span {
+    font-size: 20px;
+  }
+
+  .final-cta {
+    min-height: 62px;
+    min-width: 220px;
   }
 
   .floating-apply {
     bottom: 16px;
-    right: 16px;
+    border-width: 2px;
+    font-size: 13px;
+    gap: 6px;
+    min-height: 40px;
+    padding: 8px 11px;
+    right: 12px;
   }
 
   .canvas-lineup {
-    opacity: 0.1;
-    top: calc(94svh - 86px);
-    width: 92vw;
+    opacity: 0.08;
+    top: 92svh;
+    width: 110vw;
   }
 
   .canvas-stories {
-    left: -38vw;
-    opacity: 0.07;
-    top: calc(172svh + 20px);
-    width: 132vw;
+    left: -34vw;
+    opacity: 0.055;
+    top: 168svh;
+    width: 138vw;
   }
 
   .canvas-loop {
     opacity: 0.06;
-    right: -42vw;
-    top: 302svh;
-    width: 102vw;
+    right: -48vw;
+    top: 286svh;
+    width: 118vw;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-copy h1 {
+    font-size: clamp(34px, 10.4vw, 42px);
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .phone-stage {
+    height: 350px;
+    min-height: 350px;
+  }
+
+  .phone-main {
+    right: 22%;
+    width: 158px;
+  }
+
+  .phone-left {
+    left: 7%;
+    width: 126px;
+  }
+
+  .phone-right {
+    right: -2%;
+    width: 124px;
+  }
+
+  .mascot-hero {
+    left: 28%;
+    width: 102px;
+  }
+
+  .home-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .pay-amount {
+    font-size: clamp(28px, 9.1vw, 36px);
+  }
+
+  .pay-plus {
+    font-size: 22px;
+  }
+
+  .floating-apply {
+    bottom: 12px;
+    font-size: 13px;
+    min-height: 40px;
+    padding: 8px 11px;
   }
 }
