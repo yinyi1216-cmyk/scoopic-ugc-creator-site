@@ -596,9 +596,9 @@ img {
   justify-items: center;
   line-height: 0;
   max-height: min(88svh, 920px);
-  max-width: min(94vw, 580px);
+  max-width: calc(100vw - 36px);
   overflow: hidden;
-  width: 100%;
+  width: fit-content;
 }
 
 .video-modal-player {
@@ -607,11 +607,12 @@ img {
   border: 0;
   border-radius: 0;
   display: block;
+  height: auto;
   max-height: min(88svh, 920px);
-  max-width: min(94vw, 580px);
+  max-width: 100%;
   object-fit: contain;
   outline: 0;
-  width: auto;
+  width: min(94vw, 49.5svh, 580px);
 }
 
 .video-modal-close {
@@ -2466,7 +2467,7 @@ img {
   .video-modal-player {
     max-height: calc(100svh - 68px);
     max-width: 100%;
-    width: auto;
+    width: min(92vw, 44svh);
   }
 
   .video-modal-close {
