@@ -1202,6 +1202,7 @@ img {
   border-radius: 25px;
   height: auto;
   object-fit: cover;
+  pointer-events: none;
   width: 100%;
 }
 

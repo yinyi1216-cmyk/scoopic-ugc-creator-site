@@ -587,7 +587,13 @@ function AmbassadorVideoPhone({
       onTouchStart={enableVideoSound}
       tabIndex={0}
     >
-      <div className="orbit-phone-screen">
+      <div
+        className="orbit-phone-screen"
+        onClick={(event) => {
+          event.stopPropagation();
+          onOpen();
+        }}
+      >
         <video
           aria-label={label}
           autoPlay
