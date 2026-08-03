@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import type { KeyboardEvent, SyntheticEvent } from "react";
+import type {
+  KeyboardEvent,
+  PointerEvent as ReactPointerEvent,
+  SyntheticEvent,
+} from "react";
 
 const applicationUrl =
   "https://docs.google.com/forms/d/1_WmgSFteeQsa0DAs4Psvp8OL0bg5A3cBl0NxR_MBnY8/edit?ts=6a2ff662";
@@ -89,6 +93,20 @@ function scrollToSection(id: string) {
   element?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function getVideoOffset(index: number, activeIndex: number, total: number) {
+  const rawOffset = (index - activeIndex + total) % total;
+  return rawOffset > total / 2 ? rawOffset - total : rawOffset;
+}
+
+function getVideoPositionClass(offset: number) {
+  if (offset === 0) return "is-center";
+  if (offset === 1) return "is-near-right";
+  if (offset === 2) return "is-far-right";
+  if (offset === -1) return "is-near-left";
+  if (offset === -2) return "is-far-left";
+  return "is-back";
+}
+
 export default function Home() {
   return <LandingPage />;
 }
@@ -107,20 +125,35 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
 export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
   const [showFloatingApply, setShowFloatingApply] = useState(false);
   const [openFaqIndexes, setOpenFaqIndexes] = useState<Set<number>>(new Set());
+  const [focusedVideoIndex, setFocusedVideoIndex] = useState(0);
+  const [isVideoCarouselDragging, setIsVideoCarouselDragging] = useState(false);
   const [activeVideo, setActiveVideo] = useState<AmbassadorVideo | null>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
+  const carouselDragStartRef = useRef<number | null>(null);
+  const carouselDidSwipeRef = useRef(false);
+  const carouselManualPauseRef = useRef(0);
 
   useEffect(() => {
     const heroApply = document.getElementById("hero-apply");
-    if (!heroApply) return;
+    const finalApply = document.getElementById("final-apply-button");
 
     const onScroll = () => {
       const forceMobileCta = window.matchMedia("(max-width: 760px)").matches;
-      const heroRect = heroApply.getBoundingClientRect();
-      const heroVisible =
-        heroRect.top < window.innerHeight && heroRect.bottom > 0;
+      const inlineApplyVisible = [heroApply, finalApply].some((element) => {
+        if (!element) return false;
 
-      setShowFloatingApply(forceMobileCta || (!heroVisible && window.scrollY > 120));
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top < window.innerHeight &&
+          rect.bottom > 0 &&
+          rect.left < window.innerWidth &&
+          rect.right > 0
+        );
+      });
+
+      setShowFloatingApply(
+        !inlineApplyVisible && (forceMobileCta || window.scrollY > 120),
+      );
     };
 
     onScroll();
@@ -161,6 +194,20 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
     };
   }, [activeVideo]);
 
+  useEffect(() => {
+    if (activeVideo || isVideoCarouselDragging) return;
+
+    const timer = window.setInterval(() => {
+      if (Date.now() - carouselManualPauseRef.current < 6200) return;
+
+      setFocusedVideoIndex((current) => (current + 1) % ambassadorVideos.length);
+    }, 4200);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [activeVideo, isVideoCarouselDragging]);
+
   const toggleFaq = (index: number) => {
     setOpenFaqIndexes((current) => {
       const next = new Set(current);
@@ -174,6 +221,8 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
   };
 
   const openVideoModal = (video: AmbassadorVideo) => {
+    if (carouselDidSwipeRef.current) return;
+
     muteAllAmbassadorVideos();
     flushSync(() => {
       setActiveVideo(video);
@@ -198,6 +247,56 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       player.currentTime = 0;
     }
     setActiveVideo(null);
+  };
+
+  const showPreviousVideo = () => {
+    carouselManualPauseRef.current = Date.now();
+    setFocusedVideoIndex((current) =>
+      (current - 1 + ambassadorVideos.length) % ambassadorVideos.length,
+    );
+  };
+
+  const showNextVideo = () => {
+    carouselManualPauseRef.current = Date.now();
+    setFocusedVideoIndex((current) => (current + 1) % ambassadorVideos.length);
+  };
+
+  const onVideoCarouselPointerDown = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+
+    carouselDragStartRef.current = event.clientX;
+    carouselDidSwipeRef.current = false;
+    setIsVideoCarouselDragging(true);
+  };
+
+  const onVideoCarouselPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const startX = carouselDragStartRef.current;
+    carouselDragStartRef.current = null;
+    setIsVideoCarouselDragging(false);
+
+    if (startX === null) return;
+
+    const deltaX = event.clientX - startX;
+    if (Math.abs(deltaX) < 44) return;
+
+    carouselDidSwipeRef.current = true;
+    if (deltaX < 0) {
+      showNextVideo();
+    } else {
+      showPreviousVideo();
+    }
+
+    window.setTimeout(() => {
+      carouselDidSwipeRef.current = false;
+    }, 180);
+  };
+
+  const onVideoCarouselPointerCancel = () => {
+    carouselDragStartRef.current = null;
+    carouselDidSwipeRef.current = false;
+    setIsVideoCarouselDragging(false);
   };
 
   return (
@@ -399,13 +498,42 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           <h2>Meet Our Ambassadors</h2>
           <img className="section-pup blue" src="/assets/pup-group-28.svg" alt="" />
         </div>
-        <div className="ambassador-orbit" aria-label="Ambassador video examples">
+        <div
+          className={`ambassador-orbit ${
+            isVideoCarouselDragging ? "is-dragging" : ""
+          }`}
+          aria-label="Ambassador video examples"
+          onPointerCancel={onVideoCarouselPointerCancel}
+          onPointerDown={onVideoCarouselPointerDown}
+          onPointerUp={onVideoCarouselPointerUp}
+        >
+          <button
+            aria-label="Previous ambassador video"
+            className="orbit-control orbit-control-prev"
+            onClick={showPreviousVideo}
+            onPointerDown={(event) => event.stopPropagation()}
+            type="button"
+          >
+            ‹
+          </button>
+          <button
+            aria-label="Next ambassador video"
+            className="orbit-control orbit-control-next"
+            onClick={showNextVideo}
+            onPointerDown={(event) => event.stopPropagation()}
+            type="button"
+          >
+            ›
+          </button>
           {ambassadorVideos.map((video, index) => (
             <AmbassadorVideoPhone
               index={index}
               key={video.src}
               label={video.label}
               onOpen={() => openVideoModal(video)}
+              positionClass={getVideoPositionClass(
+                getVideoOffset(index, focusedVideoIndex, ambassadorVideos.length),
+              )}
               src={video.src}
             />
           ))}
@@ -450,6 +578,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           <a
             className="primary-cta final-cta"
             href={applicationUrl}
+            id="final-apply-button"
             rel="noreferrer"
             target="_blank"
           >
@@ -554,11 +683,13 @@ function AmbassadorVideoPhone({
   src,
   label,
   index,
+  positionClass,
   onOpen,
 }: {
   src: string;
   label: string;
   index: number;
+  positionClass: string;
   onOpen: () => void;
 }) {
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
@@ -570,7 +701,7 @@ function AmbassadorVideoPhone({
   return (
     <article
       aria-label={label}
-      className={`orbit-phone orbit-phone-${index + 1}`}
+      className={`orbit-phone orbit-phone-${index + 1} ${positionClass}`}
       onBlur={muteVideoSound}
       onFocus={enableVideoSound}
       onContextMenu={(event) => event.preventDefault()}
