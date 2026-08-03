@@ -586,21 +586,27 @@ img {
 
 .video-modal-shell {
   align-items: center;
-  display: grid;
-  justify-items: center;
-  max-height: min(88svh, 920px);
-  max-width: min(94vw, 580px);
-  width: 100%;
-}
-
-.video-modal-player {
-  aspect-ratio: 9 / 16;
   background: #050505;
   border: 2px solid rgba(255, 255, 255, 0.7);
   border-radius: 28px;
   box-shadow:
     0 24px 90px rgba(0, 0, 0, 0.62),
     0 0 38px rgba(183, 255, 22, 0.18);
+  display: grid;
+  justify-items: center;
+  line-height: 0;
+  max-height: min(88svh, 920px);
+  max-width: min(94vw, 580px);
+  overflow: hidden;
+  width: 100%;
+}
+
+.video-modal-player {
+  aspect-ratio: 9 / 16;
+  background: #050505;
+  border: 0;
+  border-radius: 0;
+  display: block;
   max-height: min(88svh, 920px);
   max-width: min(94vw, 580px);
   object-fit: contain;
@@ -2452,12 +2458,12 @@ img {
   }
 
   .video-modal-shell {
+    border-radius: 24px;
     max-height: calc(100svh - 68px);
     max-width: 100%;
   }
 
   .video-modal-player {
-    border-radius: 24px;
     max-height: calc(100svh - 68px);
     max-width: 100%;
     width: auto;
