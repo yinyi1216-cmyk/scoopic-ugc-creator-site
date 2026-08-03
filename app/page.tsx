@@ -201,7 +201,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       if (Date.now() - carouselManualPauseRef.current < 6200) return;
 
       setFocusedVideoIndex((current) => (current + 1) % ambassadorVideos.length);
-    }, 4200);
+    }, 3200);
 
     return () => {
       window.clearInterval(timer);
