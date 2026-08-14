@@ -113,7 +113,13 @@ export default function Home() {
 
 function BrandMark({ compact = false }: { compact?: boolean }) {
   return (
-    <a className="brand-mark" href="#top" aria-label="Scoopic home">
+    <a
+      className="brand-mark"
+      href="https://scoopic.ai/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Open Scoopic official website"
+    >
       <span className="brand-icon">
         <img src="/assets/scoopic-logo.png" alt="" />
       </span>
