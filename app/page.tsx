@@ -12,6 +12,8 @@ const applicationUrl =
   "https://docs.google.com/forms/d/1_WmgSFteeQsa0DAs4Psvp8OL0bg5A3cBl0NxR_MBnY8/edit?ts=6a2ff662";
 const contactUrl =
   "mailto:marketing@scoopic.ai?subject=Scoopic%20Student%20Ambassador%20Program";
+const assetBasePath = process.env.NEXT_PUBLIC_ASSET_BASE_PATH ?? "";
+const assetPath = (path: `/assets/${string}`) => `${assetBasePath}${path}`;
 
 type LandingTheme = "" | "theme-warm" | "theme-dopamine";
 type AmbassadorVideo = {
@@ -21,27 +23,27 @@ type AmbassadorVideo = {
 
 const ambassadorVideos: AmbassadorVideo[] = [
   {
-    src: "/assets/ambassador-video-1.mp4",
+    src: assetPath("/assets/ambassador-video-1.mp4"),
     label: "Ambassador video 01",
   },
   {
-    src: "/assets/ambassador-video-2.mp4",
+    src: assetPath("/assets/ambassador-video-2.mp4"),
     label: "Ambassador video 02",
   },
   {
-    src: "/assets/ambassador-video-3.mp4",
+    src: assetPath("/assets/ambassador-video-3.mp4"),
     label: "Ambassador video 03",
   },
   {
-    src: "/assets/ambassador-video-4.mp4",
+    src: assetPath("/assets/ambassador-video-4.mp4"),
     label: "Ambassador video 04",
   },
   {
-    src: "/assets/ambassador-video-5.mp4",
+    src: assetPath("/assets/ambassador-video-5.mp4"),
     label: "Ambassador video 05",
   },
   {
-    src: "/assets/ambassador-video-8.mp4",
+    src: assetPath("/assets/ambassador-video-6.mp4"),
     label: "Ambassador video 06",
   },
 ];
@@ -121,7 +123,7 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
       aria-label="Open Scoopic official website"
     >
       <span className="brand-icon">
-        <img src="/assets/scoopic-logo.png" alt="" />
+        <img src={assetPath("/assets/scoopic-logo.png")} alt="" />
       </span>
       {!compact && <span>Scoopic</span>}
     </a>
@@ -359,23 +361,23 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           <div className="phone-stage" aria-label="Scoopic app previews">
             <div className="orbit" />
             <PhoneFrame
-              src="/assets/app-pup.png"
+              src={assetPath("/assets/app-pup.png")}
               alt="Scoopic Pup unwrap screen"
               className="phone-left"
             />
             <PhoneFrame
-              src="/assets/app-feed-new.png"
+              src={assetPath("/assets/app-feed-new.png")}
               alt="Scoopic feed screen"
               className="phone-main"
             />
             <PhoneFrame
-              src="/assets/app-grid.png"
+              src={assetPath("/assets/app-grid.png")}
               alt="Scoopic story sharing screen"
               className="phone-right"
             />
             <img
               className="mascot-hero"
-              src="/assets/pup-green-main.png"
+              src={assetPath("/assets/pup-green-main.png")}
               alt="Scoopic mascot"
             />
           </div>
@@ -431,7 +433,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         <div className="section-heading">
           <p className="section-kicker">About Scoopic</p>
           <h2>What is Scoopic?</h2>
-          <img className="section-pup steam" src="/assets/pup-green-steam.png" alt="" />
+          <img className="section-pup steam" src={assetPath("/assets/pup-green-steam.png")} alt="" />
         </div>
         <div className="section-copy feature-copy">
           <p>
@@ -458,7 +460,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           </div>
         </div>
         <div className="feature-phone">
-          <img src="/assets/app-story.png" alt="Scoopic story screen" />
+          <img src={assetPath("/assets/app-story.png")} alt="Scoopic story screen" />
         </div>
       </section>
 
@@ -466,16 +468,16 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         <div className="section-heading">
           <p className="section-kicker">The program</p>
           <h2>Scoopic Student Ambassador Program</h2>
-          <img className="section-pup pink" src="/assets/pup-pink-main.png" alt="" />
+          <img className="section-pup pink" src={assetPath("/assets/pup-pink-main.png")} alt="" />
         </div>
         <div className="program-board">
           <article className="program-card">
             <span>What you do</span>
-            <ol className="program-steps">
-              <li>Create ONE short video for Scoopic every day and post it to TikTok + Instagram.</li>
-              <li>Bring 5+ friends to Scoopic to experience with you, and see what stories your puppy finds.</li>
-              <li>Share honest weekly feedback and help shape what Scoopic becomes.</li>
-            </ol>
+            <div className="program-steps">
+              <p>Create ONE short video for Scoopic every day and post it to TikTok + Instagram.</p>
+              <p>Bring 5+ friends to Scoopic to experience with you, and see what stories your puppy finds.</p>
+              <p>Share honest weekly feedback and help shape what Scoopic becomes.</p>
+            </div>
           </article>
           <article className="program-card payout-card">
             <span>What you get</span>
@@ -502,7 +504,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         <div className="section-heading centered">
           <p className="section-kicker">Stories</p>
           <h2>Meet Our Ambassadors</h2>
-          <img className="section-pup blue" src="/assets/pup-group-28.svg" alt="" />
+          <img className="section-pup blue" src={assetPath("/assets/pup-group-28.svg")} alt="" />
         </div>
         <div
           className={`ambassador-orbit ${
@@ -551,7 +553,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           <p className="section-kicker">FAQ</p>
           <h2>If You Wanna Know</h2>
           <p>We&apos;ve prepared some answers</p>
-          <img className="section-pup small-green" src="/assets/pup-group-21.svg" alt="" />
+          <img className="section-pup small-green" src={assetPath("/assets/pup-group-21.svg")} alt="" />
         </div>
         <div className="faq-list">
           {faqItems.map((item, index) => (
@@ -668,17 +670,17 @@ function CanvasDecor() {
     <div className="canvas-decor" aria-hidden="true">
       <img
         className="canvas-group canvas-lineup"
-        src="/assets/decor-pup-lineup-padded.png"
+        src={assetPath("/assets/decor-pup-lineup-padded.png")}
         alt=""
       />
       <img
         className="canvas-group canvas-stories"
-        src="/assets/decor-turn-stories-provided.png"
+        src={assetPath("/assets/decor-turn-stories-provided.png")}
         alt=""
       />
       <img
         className="canvas-group canvas-loop"
-        src="/assets/decor-scoopic-loop-provided.png"
+        src={assetPath("/assets/decor-scoopic-loop-provided.png")}
         alt=""
       />
     </div>
