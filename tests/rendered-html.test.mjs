@@ -100,6 +100,15 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /floating-apply/);
   assert.match(page, /video-modal-player/);
   assert.match(layout, /Scoopic Student Ambassador Program/);
+  assert.match(
+    layout,
+    /scoopic-ambassador-site\.scoopic-ai\.workers\.dev/,
+  );
+  assert.match(layout, /7ec9aab3389a481193a54cbc3df0d5a9/);
+  assert.match(
+    layout,
+    /https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js/,
+  );
   assert.match(css, /font-family:\s*"Telka"/);
   assert.match(page, /theme\?:\s*LandingTheme/);
   assert.match(lightPage, /theme="theme-warm"/);
