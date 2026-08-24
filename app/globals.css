@@ -1485,6 +1485,274 @@ img {
   transform: rotate(-2deg);
 }
 
+html:has(.theme-campus),
+body:has(.theme-campus) {
+  background: #f8faf2;
+  color-scheme: light;
+}
+
+.landing-page.theme-campus {
+  --lime: #91dc13;
+  --lime-2: #c9f46f;
+  --black: #f8faf2;
+  --ink: #172131;
+  --muted: rgba(23, 33, 49, 0.72);
+  --line: rgba(139, 205, 28, 0.32);
+  --panel: rgba(255, 255, 255, 0.78);
+  --panel-strong: rgba(255, 255, 255, 0.94);
+  background:
+    radial-gradient(circle at 48% 10%, rgba(204, 244, 126, 0.42), transparent 32rem),
+    radial-gradient(circle at 94% 78%, rgba(145, 220, 19, 0.2), transparent 26rem),
+    linear-gradient(180deg, #fbfcf7 0%, #f7f9f0 38%, #f4f8ea 100%);
+  color: var(--ink);
+}
+
+.theme-campus .breath-one {
+  background: radial-gradient(circle, rgba(204, 244, 126, 0.5), transparent 70%);
+}
+
+.theme-campus .breath-two {
+  background: radial-gradient(circle, rgba(145, 220, 19, 0.2), transparent 68%);
+}
+
+.theme-campus .brand-icon {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(78, 115, 17, 0.1);
+}
+
+.theme-campus .brand-mark:hover .brand-icon,
+.theme-campus .brand-mark:focus-visible .brand-icon {
+  box-shadow: 0 0 24px rgba(145, 220, 19, 0.42);
+}
+
+.theme-campus .nav-links,
+.theme-campus .hero-subtitle,
+.theme-campus .section-heading p,
+.theme-campus .section-copy,
+.theme-campus .product-points p,
+.theme-campus .program-card p,
+.theme-campus .program-steps,
+.theme-campus .pay-label,
+.theme-campus .bonus-ladder-copy p,
+.theme-campus .faq-answer p,
+.theme-campus .final-apply-panel span {
+  color: rgba(23, 33, 49, 0.72);
+}
+
+.theme-campus .nav-links a::after,
+.theme-campus .nav-links button::after {
+  background: #91dc13;
+  box-shadow: 0 0 20px rgba(145, 220, 19, 0.62);
+}
+
+.theme-campus .contact-link {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(139, 205, 28, 0.34);
+  box-shadow: 0 12px 34px rgba(78, 115, 17, 0.1);
+}
+
+.theme-campus .contact-link:hover,
+.theme-campus .contact-link:focus-visible {
+  background: rgba(204, 244, 126, 0.28);
+  box-shadow: 0 0 30px rgba(145, 220, 19, 0.28);
+}
+
+.theme-campus .title-lime,
+.theme-campus .pay-highlight,
+.theme-campus .pay-amount,
+.theme-campus .pay-plus,
+.theme-campus .product-points span,
+.theme-campus .program-card span,
+.theme-campus .bonus-ladder-copy span,
+.theme-campus .faq-number,
+.theme-campus .faq-question strong,
+.theme-campus .faq-toggle,
+.theme-campus .eyebrow,
+.theme-campus .section-kicker {
+  color: #619b00;
+  text-shadow: none;
+}
+
+.theme-campus .primary-cta,
+.theme-campus .floating-apply {
+  background: linear-gradient(180deg, #d8ff86 0%, #a9ec39 54%, #91dc13 100%);
+  border-color: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 0 0 5px rgba(145, 220, 19, 0.12),
+    0 18px 44px rgba(78, 115, 17, 0.2),
+    inset 0 -4px 0 rgba(47, 78, 0, 0.11);
+  color: #172131;
+}
+
+.theme-campus .hero-cta {
+  animation-name: applyPulseCampus;
+}
+
+@keyframes applyPulseCampus {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 5px rgba(145, 220, 19, 0.12),
+      0 18px 44px rgba(78, 115, 17, 0.2),
+      inset 0 -4px 0 rgba(47, 78, 0, 0.11);
+  }
+  50% {
+    box-shadow:
+      0 0 0 10px rgba(145, 220, 19, 0.18),
+      0 24px 64px rgba(145, 220, 19, 0.34),
+      inset 0 -4px 0 rgba(47, 78, 0, 0.11);
+  }
+}
+
+.theme-campus .primary-cta:hover,
+.theme-campus .primary-cta:focus-visible,
+.theme-campus .floating-apply:hover,
+.theme-campus .floating-apply:focus-visible {
+  box-shadow:
+    0 0 0 8px rgba(145, 220, 19, 0.16),
+    0 22px 58px rgba(113, 179, 0, 0.3),
+    inset 0 -4px 0 rgba(47, 78, 0, 0.13);
+}
+
+.theme-campus .product-points article,
+.theme-campus .program-card,
+.theme-campus .bonus-ladder,
+.theme-campus .faq-item {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(139, 205, 28, 0.32);
+  box-shadow: 0 18px 54px rgba(78, 115, 17, 0.08);
+}
+
+.theme-campus .payout-card,
+.theme-campus .bonus-ladder {
+  border-color: rgba(139, 205, 28, 0.46);
+  box-shadow:
+    0 18px 54px rgba(78, 115, 17, 0.08),
+    inset 0 0 40px rgba(204, 244, 126, 0.2);
+}
+
+.theme-campus .bonus-ladder::before {
+  background: radial-gradient(circle, rgba(145, 220, 19, 0.16), transparent 62%);
+}
+
+.theme-campus .bonus-ladder-mobile li {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(139, 205, 28, 0.34);
+}
+
+.theme-campus .bonus-ladder-mobile span {
+  color: rgba(23, 33, 49, 0.76);
+}
+
+.theme-campus .bonus-ladder-mobile strong {
+  color: #619b00;
+}
+
+.theme-campus .ladder-curve-base {
+  stroke: rgba(97, 155, 0, 0.34);
+}
+
+.theme-campus .ladder-curve-flow {
+  filter: drop-shadow(0 0 9px rgba(145, 220, 19, 0.74));
+  stroke: rgba(97, 155, 0, 0.92);
+}
+
+.theme-campus .ladder-connector {
+  stroke: rgba(97, 155, 0, 0.4);
+}
+
+.theme-campus .ladder-node-ring {
+  fill: rgba(145, 220, 19, 0.12);
+  stroke: rgba(97, 155, 0, 0.52);
+}
+
+.theme-campus .ladder-node-core {
+  fill: #91dc13;
+  filter: drop-shadow(0 0 8px rgba(145, 220, 19, 0.74));
+}
+
+.theme-campus .ladder-label rect {
+  fill: rgba(255, 255, 255, 0.94);
+  stroke: rgba(97, 155, 0, 0.5);
+}
+
+.theme-campus .ladder-views {
+  fill: rgba(23, 33, 49, 0.82);
+}
+
+.theme-campus .ladder-bonus {
+  fill: #619b00;
+}
+
+.theme-campus .faq-number {
+  background: rgba(145, 220, 19, 0.1);
+  border-color: rgba(97, 155, 0, 0.42);
+}
+
+.theme-campus .faq-toggle {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(97, 155, 0, 0.38);
+}
+
+.theme-campus .faq-item:hover,
+.theme-campus .faq-item:focus-within,
+.theme-campus .faq-item.is-open,
+.theme-campus .faq-item[open] {
+  border-color: rgba(97, 155, 0, 0.5);
+  box-shadow: 0 0 30px rgba(145, 220, 19, 0.14);
+}
+
+.theme-campus .faq-question:hover .faq-toggle,
+.theme-campus .faq-question:focus-visible .faq-toggle,
+.theme-campus .faq-item.is-open .faq-toggle,
+.theme-campus .faq-item[open] .faq-toggle {
+  background: rgba(145, 220, 19, 0.16);
+}
+
+.theme-campus .orbit-control {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(97, 155, 0, 0.42);
+  color: #619b00;
+  box-shadow: 0 10px 30px rgba(78, 115, 17, 0.1);
+}
+
+.theme-campus .phone-stage:hover .phone-frame,
+.theme-campus .phone-stage:focus-within .phone-frame,
+.theme-campus .feature-phone:hover,
+.theme-campus .feature-phone:focus-visible,
+.theme-campus .orbit-phone:hover .orbit-phone-screen,
+.theme-campus .orbit-phone:focus-within .orbit-phone-screen,
+.theme-campus .orbit-phone:focus-visible .orbit-phone-screen {
+  border-color: rgba(145, 220, 19, 0.82);
+  box-shadow:
+    0 30px 90px rgba(23, 33, 49, 0.2),
+    0 0 30px rgba(145, 220, 19, 0.24);
+}
+
+.theme-campus .orbit {
+  background: radial-gradient(ellipse, rgba(204, 244, 126, 0.3), transparent 64%);
+  border-color: rgba(139, 205, 28, 0.42);
+}
+
+.theme-campus .section-pup:hover,
+.theme-campus .section-pup:focus-visible,
+.theme-campus .phone-stage:hover .mascot-hero,
+.theme-campus .phone-stage:focus-within .mascot-hero {
+  filter:
+    drop-shadow(0 18px 28px rgba(23, 33, 49, 0.18))
+    drop-shadow(0 0 24px rgba(145, 220, 19, 0.42));
+}
+
+.theme-campus .canvas-group {
+  filter: none;
+  opacity: 0.11;
+}
+
+.theme-campus .canvas-stories,
+.theme-campus .canvas-loop {
+  opacity: 0.075;
+}
+
 .landing-page.theme-warm {
   --lime: #ffb21a;
   --lime-2: #ffe36b;
@@ -2109,6 +2377,12 @@ img {
     flex: 0 0 auto;
     font-size: 11px;
     padding: 8px 10px;
+  }
+
+  .theme-campus .nav-links button {
+    background: rgba(255, 255, 255, 0.76);
+    border-color: rgba(139, 205, 28, 0.24);
+    color: #172131;
   }
 
   .contact-link {

@@ -15,7 +15,7 @@ const contactUrl =
 const assetBasePath = process.env.NEXT_PUBLIC_ASSET_BASE_PATH ?? "";
 const assetPath = (path: `/assets/${string}`) => `${assetBasePath}${path}`;
 
-type LandingTheme = "" | "theme-warm" | "theme-dopamine";
+type LandingTheme = "" | "theme-campus" | "theme-warm" | "theme-dopamine";
 type AmbassadorVideo = {
   src: string;
   label: string;
@@ -110,7 +110,7 @@ function getVideoPositionClass(offset: number) {
 }
 
 export default function Home() {
-  return <LandingPage />;
+  return <LandingPage theme="theme-campus" />;
 }
 
 function BrandMark({ compact = false }: { compact?: boolean }) {
@@ -172,6 +172,15 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  const closeActiveVideo = () => {
+    const player = modalVideoRef.current;
+    if (player) {
+      player.pause();
+      player.currentTime = 0;
+    }
+    setActiveVideo(null);
+  };
 
   useEffect(() => {
     if (!activeVideo) return;
@@ -246,15 +255,6 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
     void player.play().catch(() => {
       player.controls = true;
     });
-  };
-
-  const closeActiveVideo = () => {
-    const player = modalVideoRef.current;
-    if (player) {
-      player.pause();
-      player.currentTime = 0;
-    }
-    setActiveVideo(null);
   };
 
   const showPreviousVideo = () => {

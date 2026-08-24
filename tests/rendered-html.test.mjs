@@ -111,8 +111,10 @@ test("contains the intended site content and no starter preview", async () => {
   );
   assert.match(css, /font-family:\s*"Telka"/);
   assert.match(page, /theme\?:\s*LandingTheme/);
+  assert.match(page, /theme="theme-campus"/);
   assert.match(lightPage, /theme="theme-warm"/);
   assert.match(dopaminePage, /theme="theme-dopamine"/);
+  assert.match(css, /\.landing-page\.theme-campus/);
   assert.match(css, /\.landing-page\.theme-warm/);
   assert.match(css, /\.landing-page\.theme-dopamine/);
   assert.doesNotMatch(
