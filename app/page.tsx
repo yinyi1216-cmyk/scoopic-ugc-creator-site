@@ -428,89 +428,92 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
         </div>
       )}
 
-      <section className="home-section product-section" id="what-is-scoopic">
-        <div className="section-heading">
-          <h2>What is Scoopic?</h2>
-          <img className="section-pup steam" src={assetPath("/assets/pup-green-steam.png")} alt="" />
-        </div>
-        <div className="section-copy feature-copy">
-          <p>
-            At Scoopic, you&apos;ll unbox a personal paparazzi puppy that turns your
-            camera roll moments into playful stories, inside jokes, and memories
-            to share with your people.
-          </p>
-          <div className="product-points" aria-label="Scoopic product points">
-            <article>
-              <span>01</span>
-              <strong>Built for close friends</strong>
-              <p>The best Scoopic moments feel like they belong to THE group chat.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <strong>Everyone gets a puppy</strong>
-              <p>Your paparazzi puppy decodes your camera roll and discovers what makes you YOU.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <strong>Your camera roll has lore</strong>
-              <p>Scoopic turns your everyday moments into funny, surprising stories worth sharing.</p>
-            </article>
+      <section className="home-section editorial-section product-section" id="what-is-scoopic">
+        <div className="section-shell product-shell">
+          <div className="section-heading product-heading">
+            <img className="section-pup steam" src={assetPath("/assets/pup-green-steam.png")} alt="" />
+            <h2>What is Scoopic</h2>
+          </div>
+          <div className="product-layout">
+            <div className="product-content">
+              <p className="product-intro">
+                At Scoopic, you&apos;ll unbox a personal paparazzi puppy that turns your
+                camera roll moments into playful stories, inside jokes, and memories
+                to share with your people.
+              </p>
+              <ul className="point-list product-prose" aria-label="Scoopic product points">
+                <li>
+                  <strong>Built for close friends.</strong> The best Scoopic moments feel like they belong to THE group chat.
+                </li>
+                <li>
+                  <strong>Everyone gets a puppy.</strong> Your paparazzi puppy decodes your camera roll and discovers what makes you YOU.
+                </li>
+                <li>
+                  <strong>Your camera roll has lore.</strong> Scoopic turns your everyday moments into funny, surprising stories worth sharing.
+                </li>
+              </ul>
+            </div>
+            <div className="product-phone-wrap">
+              <div className="feature-phone">
+                <img src={assetPath("/assets/app-story.png")} alt="Scoopic story screen" />
+              </div>
+            </div>
           </div>
         </div>
-        <div className="feature-phone">
-          <img src={assetPath("/assets/app-story.png")} alt="Scoopic story screen" />
+      </section>
+
+      <section className="home-section editorial-section program-section" id="program">
+        <div className="section-shell compact-shell program-shell">
+          <div className="section-heading centered program-heading">
+            <img className="section-pup pink" src={assetPath("/assets/pup-pink-main.png")} alt="" />
+            <h2>Scoopic UGC Creator Program</h2>
+          </div>
+          <div className="program-board">
+            <section className="program-module what-you-do" aria-labelledby="what-you-do-title">
+              <h3 id="what-you-do-title">What you do</h3>
+              <ul className="point-list program-steps">
+                <li>Create ONE short video for Scoopic every day and post it to TikTok + Instagram.</li>
+                <li>Bring 5+ friends to Scoopic to experience with you, and see what stories your puppy finds.</li>
+                <li>Share honest weekly feedback and help shape what Scoopic becomes.</li>
+              </ul>
+            </section>
+            <section className="program-module what-you-get" aria-labelledby="what-you-get-title">
+              <h3 id="what-you-get-title">What you get</h3>
+              <div className="payout-summary">
+                <div className="pay-split" aria-label="$500 monthly base plus $2,000 bonus up to">
+                  <div className="pay-column">
+                    <strong className="pay-amount pay-base">$500</strong>
+                    <small className="pay-label pay-base-label">monthly base</small>
+                  </div>
+                  <strong className="pay-plus">+</strong>
+                  <div className="pay-column">
+                    <strong className="pay-amount pay-bonus">$2,000</strong>
+                    <small className="pay-label pay-bonus-label">bonus up to</small>
+                  </div>
+                </div>
+                <p>When your videos reach view milestones, you&apos;ll get bonuses.</p>
+              </div>
+              <BonusLadder />
+            </section>
+          </div>
         </div>
       </section>
 
-      <section className="home-section program-section" id="program">
-        <div className="section-heading">
-          <h2>Scoopic UGC Creator Program</h2>
-          <img className="section-pup pink" src={assetPath("/assets/pup-pink-main.png")} alt="" />
-        </div>
-        <div className="program-board">
-          <article className="program-card">
-            <span>What you do</span>
-            <div className="program-steps">
-              <p>Create ONE short video for Scoopic every day and post it to TikTok + Instagram.</p>
-              <p>Bring 5+ friends to Scoopic to experience with you, and see what stories your puppy finds.</p>
-              <p>Share honest weekly feedback and help shape what Scoopic becomes.</p>
-            </div>
-          </article>
-          <article className="program-card payout-card">
-            <span>What you get</span>
-            <div className="pay-split" aria-label="$500 monthly base plus $2,000 bonus up to">
-              <div className="pay-column">
-                <strong className="pay-amount pay-base">$500</strong>
-                <small className="pay-label pay-base-label">monthly base</small>
-              </div>
-              <strong className="pay-plus">+</strong>
-              <div className="pay-column">
-                <strong className="pay-amount pay-bonus">$2,000</strong>
-                <small className="pay-label pay-bonus-label">bonus up to</small>
-              </div>
-            </div>
-            <p>
-              When your videos reach view milestones, you&apos;ll get bonuses.
-            </p>
-          </article>
-          <BonusLadder />
-        </div>
-      </section>
-
-      <section className="home-section ambassadors-section" id="ambassadors">
-        <div className="section-heading centered">
-          <h2>Meet Our Creator</h2>
-          <img className="section-pup blue" src={assetPath("/assets/pup-group-28.svg")} alt="" />
-        </div>
-        <div
-          className={`ambassador-orbit ${
-            isVideoCarouselDragging ? "is-dragging" : ""
-          }`}
-          aria-label="Creator video examples"
-          onPointerCancel={onVideoCarouselPointerCancel}
-          onPointerDown={onVideoCarouselPointerDown}
-          onPointerUp={onVideoCarouselPointerUp}
-        >
+      <section className="home-section editorial-section ambassadors-section" id="ambassadors">
+        <div className="section-shell ambassadors-shell">
+          <div className="section-heading centered">
+            <img className="section-pup blue" src={assetPath("/assets/pup-group-28.svg")} alt="" />
+            <h2>Meet Our Creator</h2>
+          </div>
+          <div
+            className={`ambassador-orbit ${
+              isVideoCarouselDragging ? "is-dragging" : ""
+            }`}
+            aria-label="Creator video examples"
+            onPointerCancel={onVideoCarouselPointerCancel}
+            onPointerDown={onVideoCarouselPointerDown}
+            onPointerUp={onVideoCarouselPointerUp}
+          >
           <button
             aria-label="Previous creator video"
             className="orbit-control orbit-control-prev"
@@ -529,27 +532,29 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
           >
             ›
           </button>
-          {ambassadorVideos.map((video, index) => (
-            <AmbassadorVideoPhone
-              index={index}
-              key={video.src}
-              label={video.label}
-              onOpen={() => openVideoModal(video)}
-              positionClass={getVideoPositionClass(
-                getVideoOffset(index, focusedVideoIndex, ambassadorVideos.length),
-              )}
-              src={video.src}
-            />
-          ))}
+            {ambassadorVideos.map((video, index) => (
+              <AmbassadorVideoPhone
+                index={index}
+                key={video.src}
+                label={video.label}
+                onOpen={() => openVideoModal(video)}
+                positionClass={getVideoPositionClass(
+                  getVideoOffset(index, focusedVideoIndex, ambassadorVideos.length),
+                )}
+                src={video.src}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="home-section faq-section" id="faq">
-        <div className="section-heading centered">
-          <h2>If You Wanna Know</h2>
-          <img className="section-pup small-green" src={assetPath("/assets/pup-group-21.svg")} alt="" />
-        </div>
-        <div className="faq-list">
+      <section className="home-section editorial-section faq-section" id="faq">
+        <div className="section-shell compact-shell faq-shell">
+          <div className="section-heading centered">
+            <img className="section-pup small-green" src={assetPath("/assets/pup-group-21.svg")} alt="" />
+            <h2>If You Wanna Know</h2>
+          </div>
+          <div className="faq-list">
           {faqItems.map((item, index) => (
             <article
               className={`faq-item ${openFaqIndexes.has(index) ? "is-open" : ""}`}
@@ -562,8 +567,8 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
                 onClick={() => toggleFaq(index)}
                 type="button"
               >
-                <span className="faq-number">{String(index + 1).padStart(2, "0")}</span>
-                <strong>{item.question}</strong>
+                <span aria-hidden className="faq-bullet" />
+                <span className="faq-question-text">{item.question}</span>
                 <b aria-hidden className="faq-toggle" />
               </button>
               <div
@@ -574,18 +579,19 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
               </div>
             </article>
           ))}
-        </div>
-        <div className="final-apply-panel" id="final-apply">
-          <span>Ready to build with Scoopic?</span>
-          <a
-            className="primary-cta final-cta"
-            href={applicationUrl}
-            id="final-apply-button"
-            rel="noreferrer"
-            target="_blank"
-          >
-            Apply Now <b aria-hidden>↗</b>
-          </a>
+          </div>
+          <div className="final-apply-panel" id="final-apply">
+            <span>Ready to build with Scoopic?</span>
+            <a
+              className="primary-cta final-cta"
+              href={applicationUrl}
+              id="final-apply-button"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Apply Now <b aria-hidden>↗</b>
+            </a>
+          </div>
         </div>
       </section>
     </main>

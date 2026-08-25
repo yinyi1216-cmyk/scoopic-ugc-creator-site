@@ -52,7 +52,7 @@ test("contains the intended site content and no starter preview", async () => {
   assert.doesNotMatch(page, />Stories</);
   assert.doesNotMatch(page, /We(?:&apos;|')ve prepared some answers/);
   assert.match(page, /scoopic-logo\.png/);
-  assert.match(page, /What is Scoopic\?/);
+  assert.match(page, />What is Scoopic</);
   assert.match(page, /Built for close friends/);
   assert.match(page, /Everyone gets a puppy/);
   assert.match(page, /Your camera roll has lore/);
