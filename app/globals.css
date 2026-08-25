@@ -1500,11 +1500,14 @@ body:has(.theme-campus) {
   --line: rgba(139, 205, 28, 0.32);
   --panel: rgba(255, 255, 255, 0.78);
   --panel-strong: rgba(255, 255, 255, 0.94);
-  background:
-    radial-gradient(circle at 48% 10%, rgba(204, 244, 126, 0.42), transparent 32rem),
-    radial-gradient(circle at 94% 78%, rgba(145, 220, 19, 0.2), transparent 26rem),
-    linear-gradient(180deg, #fbfcf7 0%, #f7f9f0 38%, #f4f8ea 100%);
+  background: #f8faf2;
   color: var(--ink);
+}
+
+.theme-campus .home-section,
+.theme-campus .editorial-section,
+.theme-campus .section-shell {
+  background: transparent;
 }
 
 .theme-campus .breath-one {
@@ -1575,32 +1578,26 @@ body:has(.theme-campus) {
 
 .theme-campus .primary-cta,
 .theme-campus .floating-apply {
+  animation: applyPulseCampus 3s ease-in-out infinite;
   background: linear-gradient(180deg, #d8ff86 0%, #a9ec39 54%, #91dc13 100%);
-  border-color: rgba(255, 255, 255, 0.94);
+  border: 2px solid rgba(98, 155, 0, 0.72);
   box-shadow:
-    0 0 0 5px rgba(145, 220, 19, 0.12),
-    0 18px 44px rgba(78, 115, 17, 0.2),
-    inset 0 -4px 0 rgba(47, 78, 0, 0.11);
+    0 14px 34px rgba(78, 115, 17, 0.16),
+    0 0 14px rgba(145, 220, 19, 0.12);
   color: #172131;
-}
-
-.theme-campus .hero-cta {
-  animation-name: applyPulseCampus;
 }
 
 @keyframes applyPulseCampus {
   0%,
   100% {
     box-shadow:
-      0 0 0 5px rgba(145, 220, 19, 0.12),
-      0 18px 44px rgba(78, 115, 17, 0.2),
-      inset 0 -4px 0 rgba(47, 78, 0, 0.11);
+      0 14px 34px rgba(78, 115, 17, 0.16),
+      0 0 14px rgba(145, 220, 19, 0.12);
   }
   50% {
     box-shadow:
-      0 0 0 10px rgba(145, 220, 19, 0.18),
-      0 24px 64px rgba(145, 220, 19, 0.34),
-      inset 0 -4px 0 rgba(47, 78, 0, 0.11);
+      0 16px 38px rgba(78, 115, 17, 0.18),
+      0 0 28px rgba(145, 220, 19, 0.26);
   }
 }
 
@@ -1609,9 +1606,8 @@ body:has(.theme-campus) {
 .theme-campus .floating-apply:hover,
 .theme-campus .floating-apply:focus-visible {
   box-shadow:
-    0 0 0 8px rgba(145, 220, 19, 0.16),
-    0 22px 58px rgba(113, 179, 0, 0.3),
-    inset 0 -4px 0 rgba(47, 78, 0, 0.13);
+    0 18px 42px rgba(78, 115, 17, 0.2),
+    0 0 26px rgba(145, 220, 19, 0.22);
 }
 
 .theme-campus .product-points article,
@@ -3137,11 +3133,12 @@ html:has(.landing-page) {
 
 .bonus-ladder-explainer {
   color: var(--ink);
-  font-size: clamp(20px, 1.8vw, 26px);
+  font-size: clamp(18px, 1.55vw, 23px);
   line-height: 1.4;
   margin: 0 auto clamp(28px, 3vw, 38px);
-  max-width: 760px;
+  max-width: none;
   text-align: center;
+  white-space: nowrap;
 }
 
 .bonus-ladder-explainer strong {
@@ -3396,6 +3393,7 @@ html:has(.landing-page) {
   .bonus-ladder-explainer {
     font-size: 18px;
     margin-bottom: 22px;
+    white-space: normal;
   }
 
   .bonus-ladder-chart {
