@@ -2962,6 +2962,35 @@ html:has(.landing-page) {
   order: 1;
 }
 
+.editorial-section .section-heading.section-title-row {
+  align-items: center;
+  display: flex;
+  gap: clamp(20px, 2.2vw, 30px);
+  justify-content: center;
+  margin: 0 auto clamp(42px, 5vw, 58px);
+  max-width: var(--site-reading-max);
+  text-align: left;
+}
+
+.editorial-section .section-title-row .section-pup {
+  flex: 0 0 auto;
+  height: clamp(78px, 8vw, 108px);
+  margin: 0;
+  max-height: none;
+  max-width: 116px;
+  object-fit: contain;
+  order: initial;
+  width: auto;
+}
+
+.editorial-section .section-title-row .section-pup.rose {
+  max-width: 112px;
+}
+
+.editorial-section .section-title-row h2 {
+  order: initial;
+}
+
 .point-list {
   display: grid;
   font-size: var(--body-copy-size);
@@ -3033,9 +3062,18 @@ html:has(.landing-page) {
 
 .program-board {
   display: grid;
-  gap: 72px;
+  gap: clamp(92px, 10vw, 124px);
   grid-template-columns: 1fr;
   margin: 0;
+}
+
+.program-shell,
+.what-you-get {
+  max-width: 1080px;
+}
+
+.program-module > .section-title-row {
+  margin-bottom: clamp(38px, 4vw, 48px);
 }
 
 .program-board > *,
@@ -3061,7 +3099,7 @@ html:has(.landing-page) {
 
 .program-steps {
   margin: 0 auto;
-  max-width: 820px;
+  max-width: 900px;
 }
 
 .what-you-get {
@@ -3069,12 +3107,13 @@ html:has(.landing-page) {
 }
 
 .payout-summary {
-  margin: 0 auto 36px;
-  max-width: 760px;
+  margin: 0 auto;
+  max-width: 800px;
   text-align: center;
 }
 
 .pay-split {
+  gap: clamp(18px, 3vw, 42px);
   justify-content: center;
   margin: 0 auto;
 }
@@ -3095,7 +3134,7 @@ html:has(.landing-page) {
 }
 
 .bonus-ladder {
-  margin-top: 42px;
+  margin-top: clamp(52px, 6vw, 72px);
 }
 
 .bonus-ladder::before {
@@ -3103,14 +3142,14 @@ html:has(.landing-page) {
 }
 
 .bonus-ladder-copy {
-  margin-bottom: 18px;
-  text-align: left;
+  margin-bottom: clamp(22px, 3vw, 32px);
+  text-align: center;
 }
 
 .bonus-ladder-copy span {
   color: inherit;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -3123,6 +3162,39 @@ html:has(.landing-page) {
 
 .bonus-ladder-chart {
   width: 100%;
+}
+
+.earning-points {
+  display: grid;
+  gap: clamp(36px, 5vw, 72px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: clamp(34px, 4vw, 48px) auto 0;
+  max-width: 1040px;
+  padding: 0;
+}
+
+.earning-points li {
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.55;
+  padding-left: 22px;
+  position: relative;
+}
+
+.earning-points li::before {
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--lime) 14%, transparent);
+  content: "";
+  height: 8px;
+  left: 0;
+  position: absolute;
+  top: 0.62em;
+  width: 8px;
+}
+
+.earning-points strong {
+  font-weight: 700;
 }
 
 .ambassadors-section {
@@ -3270,9 +3342,24 @@ html:has(.landing-page) {
     margin-bottom: 32px;
   }
 
+  .editorial-section .section-heading.section-title-row {
+    gap: 18px;
+    margin-bottom: 36px;
+    text-align: left;
+  }
+
   .editorial-section .section-pup {
     max-height: 92px;
     max-width: 100px;
+  }
+
+  .editorial-section .section-title-row .section-pup {
+    height: 68px;
+    max-width: 76px;
+  }
+
+  .editorial-section .section-title-row h2 {
+    font-size: clamp(32px, 9vw, 40px);
   }
 
   .product-layout {
@@ -3298,7 +3385,11 @@ html:has(.landing-page) {
   }
 
   .program-board {
-    gap: 58px;
+    gap: 76px;
+  }
+
+  .program-module > .section-title-row {
+    margin-bottom: 32px;
   }
 
   .program-module h3 {
@@ -3319,7 +3410,8 @@ html:has(.landing-page) {
   }
 
   .bonus-ladder-copy {
-    margin-bottom: 8px;
+    margin-bottom: 18px;
+    text-align: center;
   }
 
   .bonus-ladder-copy span {
@@ -3346,6 +3438,13 @@ html:has(.landing-page) {
     border-radius: 0 !important;
     box-shadow: none !important;
     padding: 14px 2px !important;
+  }
+
+  .earning-points {
+    gap: 18px;
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+    max-width: 560px;
   }
 
   .ambassadors-section .ambassador-orbit {

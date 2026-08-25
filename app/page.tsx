@@ -130,6 +130,29 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
   );
 }
 
+function SectionTitle({
+  id,
+  title,
+  pup,
+  pupClass = "",
+}: {
+  id?: string;
+  title: string;
+  pup: `/assets/${string}`;
+  pupClass?: string;
+}) {
+  return (
+    <div className="section-heading section-title-row">
+      <img
+        alt=""
+        className={`section-pup ${pupClass}`.trim()}
+        src={assetPath(pup)}
+      />
+      <h2 id={id}>{title}</h2>
+    </div>
+  );
+}
+
 export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
   const [showFloatingApply, setShowFloatingApply] = useState(false);
   const [openFaqIndexes, setOpenFaqIndexes] = useState<Set<number>>(new Set());
@@ -430,10 +453,11 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section editorial-section product-section" id="what-is-scoopic">
         <div className="section-shell product-shell">
-          <div className="section-heading product-heading">
-            <img className="section-pup steam" src={assetPath("/assets/pup-green-steam.png")} alt="" />
-            <h2>What is Scoopic</h2>
-          </div>
+          <SectionTitle
+            pup="/assets/pup-green-steam.png"
+            pupClass="steam"
+            title="What is Scoopic"
+          />
           <div className="product-layout">
             <div className="product-content">
               <p className="product-intro">
@@ -463,14 +487,15 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       </section>
 
       <section className="home-section editorial-section program-section" id="program">
-        <div className="section-shell compact-shell program-shell">
-          <div className="section-heading centered program-heading">
-            <img className="section-pup pink" src={assetPath("/assets/pup-pink-main.png")} alt="" />
-            <h2>Scoopic UGC Creator Program</h2>
-          </div>
+        <div className="section-shell program-shell">
           <div className="program-board">
             <section className="program-module what-you-do" aria-labelledby="what-you-do-title">
-              <h3 id="what-you-do-title">What you do</h3>
+              <SectionTitle
+                id="what-you-do-title"
+                pup="/assets/pup-pink-main.png"
+                pupClass="pink"
+                title="What you do"
+              />
               <ul className="point-list program-steps">
                 <li>Create ONE short video for Scoopic every day and post it to TikTok + Instagram.</li>
                 <li>Bring 5+ friends to Scoopic to experience with you, and see what stories your puppy finds.</li>
@@ -478,7 +503,12 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
               </ul>
             </section>
             <section className="program-module what-you-get" aria-labelledby="what-you-get-title">
-              <h3 id="what-you-get-title">What you get</h3>
+              <SectionTitle
+                id="what-you-get-title"
+                pup="/assets/pup-group-34.svg"
+                pupClass="rose"
+                title="What you get"
+              />
               <div className="payout-summary">
                 <div className="pay-split" aria-label="$500 monthly base plus $2,000 bonus up to">
                   <div className="pay-column">
@@ -501,10 +531,11 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section editorial-section ambassadors-section" id="ambassadors">
         <div className="section-shell ambassadors-shell">
-          <div className="section-heading centered">
-            <img className="section-pup blue" src={assetPath("/assets/pup-group-28.svg")} alt="" />
-            <h2>Meet Our Creator</h2>
-          </div>
+          <SectionTitle
+            pup="/assets/pup-group-28.svg"
+            pupClass="blue"
+            title="Meet Our Creator"
+          />
           <div
             className={`ambassador-orbit ${
               isVideoCarouselDragging ? "is-dragging" : ""
@@ -550,10 +581,11 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section editorial-section faq-section" id="faq">
         <div className="section-shell compact-shell faq-shell">
-          <div className="section-heading centered">
-            <img className="section-pup small-green" src={assetPath("/assets/pup-group-21.svg")} alt="" />
-            <h2>If You Wanna Know</h2>
-          </div>
+          <SectionTitle
+            pup="/assets/pup-group-21.svg"
+            pupClass="small-green"
+            title="If You Wanna Know"
+          />
           <div className="faq-list">
           {faqItems.map((item, index) => (
             <article
@@ -603,7 +635,6 @@ function BonusLadder() {
     <article className="bonus-ladder" aria-label="View bonus ladder">
       <div className="bonus-ladder-copy">
         <span>View bonus ladder</span>
-        <p>Eligible video views unlock higher bonus tiers.</p>
       </div>
       <svg
         aria-hidden="true"
@@ -661,6 +692,17 @@ function BonusLadder() {
           </li>
         ))}
       </ol>
+      <ul className="earning-points" aria-label="Earning details">
+        <li>
+          <strong>$500 guaranteed</strong> for every completed monthly cycle.
+        </li>
+        <li>
+          Each eligible high-performing video can unlock <strong>up to $2,000.</strong>
+        </li>
+        <li>
+          Bonuses stack across eligible videos, with <strong>no earnings cap.</strong>
+        </li>
+      </ul>
     </article>
   );
 }
