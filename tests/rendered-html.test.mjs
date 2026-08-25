@@ -46,7 +46,11 @@ test("contains the intended site content and no starter preview", async () => {
   ]);
 
   assert.match(page, /Become a Scoopic/);
-  assert.match(page, /Looking for Passionate GenZ UGC Creators/);
+  assert.doesNotMatch(page, /Looking for Passionate GenZ UGC Creators/);
+  assert.doesNotMatch(page, /About Scoopic/);
+  assert.doesNotMatch(page, /The program/);
+  assert.doesNotMatch(page, />Stories</);
+  assert.doesNotMatch(page, /We(?:&apos;|')ve prepared some answers/);
   assert.match(page, /scoopic-logo\.png/);
   assert.match(page, /What is Scoopic\?/);
   assert.match(page, /Built for close friends/);

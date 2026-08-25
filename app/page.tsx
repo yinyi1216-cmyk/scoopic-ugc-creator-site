@@ -336,7 +336,6 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
         <section className="hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">Looking for Passionate GenZ UGC Creators</p>
             <h1>
               <span className="title-line title-white">Become a Scoopic</span>
               <span className="title-line title-lime">UGC Creator</span>
@@ -431,7 +430,6 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section product-section" id="what-is-scoopic">
         <div className="section-heading">
-          <p className="section-kicker">About Scoopic</p>
           <h2>What is Scoopic?</h2>
           <img className="section-pup steam" src={assetPath("/assets/pup-green-steam.png")} alt="" />
         </div>
@@ -466,7 +464,6 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section program-section" id="program">
         <div className="section-heading">
-          <p className="section-kicker">The program</p>
           <h2>Scoopic UGC Creator Program</h2>
           <img className="section-pup pink" src={assetPath("/assets/pup-pink-main.png")} alt="" />
         </div>
@@ -502,7 +499,6 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section ambassadors-section" id="ambassadors">
         <div className="section-heading centered">
-          <p className="section-kicker">Stories</p>
           <h2>Meet Our Creator</h2>
           <img className="section-pup blue" src={assetPath("/assets/pup-group-28.svg")} alt="" />
         </div>
@@ -550,9 +546,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
       <section className="home-section faq-section" id="faq">
         <div className="section-heading centered">
-          <p className="section-kicker">FAQ</p>
           <h2>If You Wanna Know</h2>
-          <p>We&apos;ve prepared some answers</p>
           <img className="section-pup small-green" src={assetPath("/assets/pup-group-21.svg")} alt="" />
         </div>
         <div className="faq-list">
