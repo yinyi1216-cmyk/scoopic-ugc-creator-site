@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ASSET_BASE_PATH ?? "";
@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     icon: iconPath,
     shortcut: iconPath,
   },
+};
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  viewportFit: "cover",
+  width: "device-width",
 };
 
 export default function RootLayout({

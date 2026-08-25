@@ -381,6 +381,7 @@ img {
   min-height: 68px;
   min-width: min(270px, 100%);
   padding: 16px 34px;
+  position: relative;
   transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
@@ -1500,6 +1501,10 @@ body:has(.theme-campus) {
   --line: rgba(139, 205, 28, 0.32);
   --panel: rgba(255, 255, 255, 0.78);
   --panel-strong: rgba(255, 255, 255, 0.94);
+  --phone-shadow: 0 14px 34px rgba(97, 155, 0, 0.09);
+  --phone-shadow-active:
+    0 18px 44px rgba(97, 155, 0, 0.13),
+    0 0 18px rgba(145, 220, 19, 0.12);
   background: #f8faf2;
   color: var(--ink);
 }
@@ -1578,26 +1583,41 @@ body:has(.theme-campus) {
 
 .theme-campus .primary-cta,
 .theme-campus .floating-apply {
-  animation: applyPulseCampus 3s ease-in-out infinite;
+  animation: none;
   background: linear-gradient(180deg, #d8ff86 0%, #a9ec39 54%, #91dc13 100%);
-  border: 2px solid rgba(98, 155, 0, 0.72);
+  border: 3px solid rgba(255, 255, 255, 0.98);
   box-shadow:
     0 14px 34px rgba(78, 115, 17, 0.16),
-    0 0 14px rgba(145, 220, 19, 0.12);
+    inset 0 -4px 0 rgba(78, 115, 17, 0.12);
   color: #172131;
+  isolation: isolate;
+  overflow: visible;
 }
 
-@keyframes applyPulseCampus {
+.theme-campus .primary-cta::after,
+.theme-campus .floating-apply::after {
+  animation: applyBreathRingCampus 3s ease-in-out infinite;
+  border: 8px solid rgba(169, 236, 57, 0.24);
+  border-radius: inherit;
+  content: "";
+  inset: -12px;
+  opacity: 0.24;
+  pointer-events: none;
+  position: absolute;
+  transform: scale(0.98);
+  transition: border-color 180ms ease;
+  z-index: -1;
+}
+
+@keyframes applyBreathRingCampus {
   0%,
   100% {
-    box-shadow:
-      0 14px 34px rgba(78, 115, 17, 0.16),
-      0 0 14px rgba(145, 220, 19, 0.12);
+    opacity: 0.2;
+    transform: scale(0.98);
   }
   50% {
-    box-shadow:
-      0 16px 38px rgba(78, 115, 17, 0.18),
-      0 0 28px rgba(145, 220, 19, 0.26);
+    opacity: 0.52;
+    transform: scale(1.035);
   }
 }
 
@@ -1606,8 +1626,24 @@ body:has(.theme-campus) {
 .theme-campus .floating-apply:hover,
 .theme-campus .floating-apply:focus-visible {
   box-shadow:
-    0 18px 42px rgba(78, 115, 17, 0.2),
-    0 0 26px rgba(145, 220, 19, 0.22);
+    0 18px 42px rgba(78, 115, 17, 0.22),
+    inset 0 -4px 0 rgba(78, 115, 17, 0.14);
+}
+
+.theme-campus .primary-cta:hover::after,
+.theme-campus .primary-cta:focus-visible::after,
+.theme-campus .floating-apply:hover::after,
+.theme-campus .floating-apply:focus-visible::after {
+  border-color: rgba(169, 236, 57, 0.36);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-campus .primary-cta::after,
+  .theme-campus .floating-apply::after {
+    animation: none;
+    opacity: 0.34;
+    transform: none;
+  }
 }
 
 .theme-campus .product-points article,
@@ -1712,6 +1748,12 @@ body:has(.theme-campus) {
   box-shadow: 0 10px 30px rgba(78, 115, 17, 0.1);
 }
 
+.theme-campus .phone-frame,
+.theme-campus .feature-phone,
+.theme-campus .orbit-phone-screen {
+  box-shadow: var(--phone-shadow);
+}
+
 .theme-campus .phone-stage:hover .phone-frame,
 .theme-campus .phone-stage:focus-within .phone-frame,
 .theme-campus .feature-phone:hover,
@@ -1720,9 +1762,7 @@ body:has(.theme-campus) {
 .theme-campus .orbit-phone:focus-within .orbit-phone-screen,
 .theme-campus .orbit-phone:focus-visible .orbit-phone-screen {
   border-color: rgba(145, 220, 19, 0.82);
-  box-shadow:
-    0 30px 90px rgba(23, 33, 49, 0.2),
-    0 0 30px rgba(145, 220, 19, 0.24);
+  box-shadow: var(--phone-shadow-active);
 }
 
 .theme-campus .orbit {
@@ -3018,6 +3058,23 @@ html:has(.landing-page) {
   font-weight: 700;
 }
 
+.landing-page.theme-campus :is(
+  .hero-subtitle,
+  .section-heading p,
+  .section-copy,
+  .product-intro,
+  .point-list,
+  .product-points p,
+  .program-card p,
+  .bonus-ladder-copy p,
+  .bonus-ladder-explainer,
+  .earning-points,
+  .faq-answer p,
+  .final-apply-panel span
+) {
+  color: var(--ink);
+}
+
 .product-section {
   background: transparent;
 }
@@ -3472,5 +3529,122 @@ html:has(.landing-page) {
 
   .pay-plus {
     font-size: 20px;
+  }
+}
+
+/* Mobile layout: centered content with a fixed, notch-aware safe gutter. */
+@media (max-width: 760px) {
+  .landing-page {
+    --site-gutter: 20px;
+    --mobile-safe-gutter: max(
+      var(--site-gutter),
+      env(safe-area-inset-left),
+      env(safe-area-inset-right)
+    );
+  }
+
+  .landing-page .hero-shell,
+  .home-section.editorial-section {
+    padding-left: var(--mobile-safe-gutter);
+    padding-right: var(--mobile-safe-gutter);
+  }
+
+  .landing-page .top-nav,
+  .landing-page .hero-grid,
+  .section-shell,
+  .product-layout {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .nav-links {
+    gap: clamp(4px, 1.5vw, 6px);
+    justify-content: safe center;
+    margin-left: 0;
+    max-width: 100%;
+    overflow-x: visible;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .nav-links button {
+    font-size: clamp(9px, 2.75vw, 11px);
+    padding: 7px clamp(6px, 2vw, 10px);
+  }
+
+  .hero-copy {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+  }
+
+  .hero-subtitle,
+  .hero-cta {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .phone-stage {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 350px;
+  }
+
+  .phone-main {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) rotate(1deg);
+    width: clamp(150px, 44vw, 172px);
+  }
+
+  .phone-left {
+    left: 4%;
+    width: clamp(112px, 35vw, 138px);
+  }
+
+  .phone-right {
+    right: 5%;
+    width: clamp(110px, 34vw, 134px);
+  }
+
+  .mascot-hero {
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(98px, 29vw, 112px);
+  }
+
+  .phone-stage:hover .phone-main,
+  .phone-stage:focus-within .phone-main {
+    transform: translateX(-50%) translateY(-14px) rotate(0deg) scale(1.025);
+  }
+
+  .phone-stage:hover .mascot-hero,
+  .phone-stage:focus-within .mascot-hero {
+    transform: translateX(-50%) translateY(-16px) rotate(-3deg) scale(1.08);
+  }
+
+  .product-section .feature-phone {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .floating-apply {
+    bottom: max(20px, env(safe-area-inset-bottom));
+    right: calc(var(--mobile-safe-gutter) + 12px);
+  }
+
+  .video-modal {
+    padding-left: var(--mobile-safe-gutter);
+    padding-right: var(--mobile-safe-gutter);
+  }
+
+  .video-modal-close {
+    right: var(--mobile-safe-gutter);
+    top: max(20px, env(safe-area-inset-top));
   }
 }
