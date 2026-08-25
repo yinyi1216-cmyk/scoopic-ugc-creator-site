@@ -74,7 +74,8 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /\$2,000/);
   assert.match(page, /monthly base/);
   assert.match(page, /bonus up to/);
-  assert.match(page, /View bonus ladder/);
+  assert.match(page, /When your videos reach view milestones/);
+  assert.doesNotMatch(page, />View bonus ladder</);
   assert.doesNotMatch(page, /Eligible video views unlock higher bonus tiers/);
   assert.match(page, /\$500 guaranteed/);
   assert.match(page, /Each eligible high-performing video can unlock/);

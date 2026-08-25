@@ -521,7 +521,6 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
                     <small className="pay-label pay-bonus-label">bonus up to</small>
                   </div>
                 </div>
-                <p>When your videos reach view milestones, you&apos;ll get bonuses.</p>
               </div>
               <BonusLadder />
             </section>
@@ -632,10 +631,10 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
 
 function BonusLadder() {
   return (
-    <article className="bonus-ladder" aria-label="View bonus ladder">
-      <div className="bonus-ladder-copy">
-        <span>View bonus ladder</span>
-      </div>
+    <article className="bonus-ladder" aria-label="Bonus milestones">
+      <p className="bonus-ladder-explainer">
+        <strong>When your videos reach view milestones, you&apos;ll get bonuses.</strong>
+      </p>
       <svg
         aria-hidden="true"
         className="bonus-ladder-chart"
