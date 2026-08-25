@@ -25,13 +25,13 @@ async function render() {
   );
 }
 
-test("server-renders the Scoopic ambassador site shell", async () => {
+test("server-renders the Scoopic creator site shell", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /Scoopic Student Ambassador Program/i);
+  assert.match(html, /Scoopic UGC Creator Program/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -63,7 +63,7 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /Bring 5\+ friends to Scoopic/);
   assert.match(page, /Share honest weekly feedback/);
   assert.match(page, /final-apply/);
-  assert.match(page, /Scoopic Student Ambassador Program/);
+  assert.match(page, /Scoopic UGC Creator Program/);
   assert.match(page, /\$500/);
   assert.match(page, /\$2,000/);
   assert.match(page, /monthly base/);
@@ -71,7 +71,7 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /View bonus ladder/);
   assert.match(page, /50K views/);
   assert.match(page, /5M views/);
-  assert.match(page, /Meet Our Ambassadors/);
+  assert.match(page, /Meet Our Creator/);
   assert.match(page, /ambassadorVideos/);
   assert.match(page, /ambassador-video-1\.mp4/);
   assert.match(page, /ambassador-video-4\.mp4/);
@@ -99,7 +99,7 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /faq-answer/);
   assert.match(page, /floating-apply/);
   assert.match(page, /video-modal-player/);
-  assert.match(layout, /Scoopic Student Ambassador Program/);
+  assert.match(layout, /Scoopic UGC Creator Program/);
   assert.match(
     layout,
     /scoopic-ambassador-site\.scoopic-ai\.workers\.dev/,

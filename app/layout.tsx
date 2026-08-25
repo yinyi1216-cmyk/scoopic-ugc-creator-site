@@ -20,9 +20,9 @@ const analyticsBootstrap = `
 `;
 
 export const metadata: Metadata = {
-  title: "Scoopic Student Ambassador Program",
+  title: "Scoopic UGC Creator Program",
   description:
-    "Apply to become a Scoopic Student Ambassador, learn what Scoopic is, see the program, watch creator examples, and review common questions.",
+    "Apply to become a Scoopic UGC Creator, learn what Scoopic is, explore the program, watch creator examples, and review common questions.",
   icons: {
     icon: iconPath,
     shortcut: iconPath,

@@ -11,7 +11,7 @@ import type {
 const applicationUrl =
   "https://docs.google.com/forms/d/1_WmgSFteeQsa0DAs4Psvp8OL0bg5A3cBl0NxR_MBnY8/edit?ts=6a2ff662";
 const contactUrl =
-  "mailto:marketing@scoopic.ai?subject=Scoopic%20Student%20Ambassador%20Program";
+  "mailto:marketing@scoopic.ai?subject=Scoopic%20UGC%20Creator%20Program";
 const assetBasePath = process.env.NEXT_PUBLIC_ASSET_BASE_PATH ?? "";
 const assetPath = (path: `/assets/${string}`) => `${assetBasePath}${path}`;
 
@@ -24,27 +24,27 @@ type AmbassadorVideo = {
 const ambassadorVideos: AmbassadorVideo[] = [
   {
     src: assetPath("/assets/ambassador-video-1.mp4"),
-    label: "Ambassador video 01",
+    label: "Creator video 01",
   },
   {
     src: assetPath("/assets/ambassador-video-2.mp4"),
-    label: "Ambassador video 02",
+    label: "Creator video 02",
   },
   {
     src: assetPath("/assets/ambassador-video-3.mp4"),
-    label: "Ambassador video 03",
+    label: "Creator video 03",
   },
   {
     src: assetPath("/assets/ambassador-video-4.mp4"),
-    label: "Ambassador video 04",
+    label: "Creator video 04",
   },
   {
     src: assetPath("/assets/ambassador-video-5.mp4"),
-    label: "Ambassador video 05",
+    label: "Creator video 05",
   },
   {
     src: assetPath("/assets/ambassador-video-6.mp4"),
-    label: "Ambassador video 06",
+    label: "Creator video 06",
   },
 ];
 
@@ -52,7 +52,7 @@ const faqItems = [
   {
     question: "Can I apply if I'm not currently in college?",
     answer:
-      "Absolutely! We call it Student Ambassador because Scoopic is targeting younger generation around high school and college age. But you don't have to be a student to apply. If you have an active social life, plenty of real moments to share, and a passion for content creation, we'd love to hear from you.",
+      "Absolutely! We call this the UGC Creator Program because Scoopic is targeting the younger generation around high school and college age. But you don't have to be a student to apply. If you have an active social life, plenty of real moments to share, and a passion for content creation, we'd love to hear from you.",
   },
   {
     question: "Will I post on my personal accounts?",
@@ -62,7 +62,7 @@ const faqItems = [
   {
     question: "What will I actually be posting?",
     answer:
-      "Think real friend moments, camera-roll stories, relatable text hooks, and honest reactions to Scoopic. We'll provide examples, but the content should still feel like YOU. Also search up Scoopic on TikTok and Instagram to see what our current ambassadors are creating!",
+      "Think real friend moments, camera-roll stories, relatable text hooks, and honest reactions to Scoopic. We'll provide examples, but the content should still feel like YOU. Also search up Scoopic on TikTok and Instagram to see what our current creators are creating!",
   },
   {
     question: "How many videos are we talking about?",
@@ -323,7 +323,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
               Program
             </button>
             <button type="button" onClick={() => scrollToSection("ambassadors")}>
-              Ambassadors
+              Creators
             </button>
             <button type="button" onClick={() => scrollToSection("faq")}>
               FAQ
@@ -339,7 +339,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
             <p className="eyebrow">Looking for Passionate GenZ UGC Creators</p>
             <h1>
               <span className="title-line title-white">Become a Scoopic</span>
-              <span className="title-line title-lime">Student Ambassador</span>
+              <span className="title-line title-lime">UGC Creator</span>
             </h1>
             <p className="hero-subtitle">
               Be the first creator to experience the next social app for real
@@ -467,7 +467,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       <section className="home-section program-section" id="program">
         <div className="section-heading">
           <p className="section-kicker">The program</p>
-          <h2>Scoopic Student Ambassador Program</h2>
+          <h2>Scoopic UGC Creator Program</h2>
           <img className="section-pup pink" src={assetPath("/assets/pup-pink-main.png")} alt="" />
         </div>
         <div className="program-board">
@@ -503,20 +503,20 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
       <section className="home-section ambassadors-section" id="ambassadors">
         <div className="section-heading centered">
           <p className="section-kicker">Stories</p>
-          <h2>Meet Our Ambassadors</h2>
+          <h2>Meet Our Creator</h2>
           <img className="section-pup blue" src={assetPath("/assets/pup-group-28.svg")} alt="" />
         </div>
         <div
           className={`ambassador-orbit ${
             isVideoCarouselDragging ? "is-dragging" : ""
           }`}
-          aria-label="Ambassador video examples"
+          aria-label="Creator video examples"
           onPointerCancel={onVideoCarouselPointerCancel}
           onPointerDown={onVideoCarouselPointerDown}
           onPointerUp={onVideoCarouselPointerUp}
         >
           <button
-            aria-label="Previous ambassador video"
+            aria-label="Previous creator video"
             className="orbit-control orbit-control-prev"
             onClick={showPreviousVideo}
             onPointerDown={(event) => event.stopPropagation()}
@@ -525,7 +525,7 @@ export function LandingPage({ theme = "" }: { theme?: LandingTheme }) {
             ‹
           </button>
           <button
-            aria-label="Next ambassador video"
+            aria-label="Next creator video"
             className="orbit-control orbit-control-next"
             onClick={showNextVideo}
             onPointerDown={(event) => event.stopPropagation()}
