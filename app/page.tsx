@@ -23,7 +23,7 @@ type AmbassadorVideo = {
 
 const ambassadorVideos: AmbassadorVideo[] = [
   {
-    src: assetPath("/assets/ambassador-video-1.mp4"),
+    src: assetPath("/assets/ambassador-video-1-a365cad9.mp4"),
     label: "Creator video 01",
   },
   {

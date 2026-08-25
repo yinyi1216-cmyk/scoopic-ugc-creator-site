@@ -84,7 +84,7 @@ test("contains the intended site content and no starter preview", async () => {
   assert.match(page, /5M views/);
   assert.match(page, /Meet Our Creator/);
   assert.match(page, /ambassadorVideos/);
-  assert.match(page, /ambassador-video-1\.mp4/);
+  assert.match(page, /ambassador-video-1-a365cad9\.mp4/);
   assert.match(page, /ambassador-video-4\.mp4/);
   assert.match(page, /ambassador-video-6\.mp4/);
   assert.doesNotMatch(page, /ambassador-video-8\.mp4/);
